@@ -1,9 +1,15 @@
-package java.guis;
+package program.guis;
 
 /**
  * <p>This abstract class contains all methods needed for a GUI. Such as printing the Board and getting Input from the Human-Player</p>
  */
 public abstract class Gui {
+
+    protected final int bottomPlayer;
+
+    protected Gui(int bottomPlayer) {
+        this.bottomPlayer = bottomPlayer;
+    }
 
     /**
      * Draws the board. For example on the terminal.

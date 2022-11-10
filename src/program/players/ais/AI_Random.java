@@ -1,7 +1,7 @@
-package java.players.ais;
+package program.players.ais;
 
-import java.players.Player;
-import java.ChessRules;
+import program.ChessRules;
+import program.players.Player;
 
 import java.util.List;
 import java.util.Random;

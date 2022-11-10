@@ -1,4 +1,4 @@
-package java.players;
+package program.players;
 
 /**
  * Abstract Player class for the Human-Player as well as all AIs

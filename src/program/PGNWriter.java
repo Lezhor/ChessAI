@@ -1,4 +1,4 @@
-package java;
+package program;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -8,7 +8,7 @@ import java.util.Objects;
 
 public class PGNWriter {
 
-    private final String directoryPath = "src/data/pgn/";
+    private final String directoryPath = "src/data/testpgn/";
     private String filePath = "";
 
     // Variables for PGN-File

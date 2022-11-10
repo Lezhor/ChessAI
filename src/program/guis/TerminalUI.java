@@ -1,6 +1,8 @@
-package java.guis;
+package program.guis;
 
-import java.ChessRules;
+import program.ChessRules;
+import program.players.HumanPlayer;
+import program.players.Player;
 
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -8,7 +10,11 @@ import java.util.Scanner;
 /**
  * A UI which uses the Console only to communicate with the User.
  */
-public class TerminalUI extends java.guis.Gui {
+public class TerminalUI extends Gui {
+
+    public TerminalUI(int bottomPlayer) {
+        super(bottomPlayer);
+    }
 
     /**
      * Prints Board to the console
@@ -23,9 +29,13 @@ public class TerminalUI extends java.guis.Gui {
                     System.out.print("-");
                 }
                 System.out.println();
-                System.out.print(((i / 8) + 1) + "  | ");
+                if (bottomPlayer == ChessRules.PLAYER_WHITE) {
+                    System.out.print((8 - (i / 8)) + "  | ");
+                } else {
+                    System.out.print(((i / 8) + 1) + "  | ");
+                }
             }
-            String pieceName = ChessRules.getPieceName(board[i]);
+            String pieceName = ChessRules.getPieceName(board[bottomPlayer == ChessRules.PLAYER_WHITE ? i : 63 - i]);
             for (int j = 0; j < Math.ceil((12 - pieceName.length()) / 2f); j++) {
                 System.out.print(" ");
             }
@@ -40,7 +50,11 @@ public class TerminalUI extends java.guis.Gui {
             System.out.print("-");
         }
         String s = "              ";
-        System.out.println("\n           " + "A" + s + "B" + s + "C" + s + "D" + s + "E" + s + "F" + s + "G" + s + "H");
+        if (bottomPlayer == ChessRules.PLAYER_WHITE) {
+            System.out.println("\n           " + "A" + s + "B" + s + "C" + s + "D" + s + "E" + s + "F" + s + "G" + s + "H");
+        } else {
+            System.out.println("\n           " + "H" + s + "G" + s + "G" + s + "E" + s + "D" + s + "C" + s + "B" + s + "A");
+        }
 
         float score = 0f;
         for (int cell : board) {
@@ -128,7 +142,7 @@ public class TerminalUI extends java.guis.Gui {
      * @return The move-integer
      * @throws IllegalArgumentException In case the User made a wrong input e.g. a typo
      */
-    public static int getMove(String input) throws IllegalArgumentException {
+    public int getMove(String input) throws IllegalArgumentException {
         if (input.length() < 5)
             throw new IllegalArgumentException();
         String pos1 = input.substring(0, 2);
@@ -142,7 +156,7 @@ public class TerminalUI extends java.guis.Gui {
      * @return The int-position
      * @throws IllegalArgumentException In case the Letters are not between A-H, the number is not between 1-8 or the string has not a length of two.
      */
-    public static int getPos(String stringPos) throws IllegalArgumentException {
+    public int getPos(String stringPos) throws IllegalArgumentException {
         if (stringPos.length() != 2) {
             throw new IllegalArgumentException();
         }
@@ -161,7 +175,7 @@ public class TerminalUI extends java.guis.Gui {
         if (pos == -1)
             throw new IllegalArgumentException();
         try {
-            pos += (Integer.parseInt(stringPos.substring(1)) - 1) * 8;
+            pos += (8 - Integer.parseInt(stringPos.substring(1))) * 8;
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException();
         }

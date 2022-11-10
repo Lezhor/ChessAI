@@ -1,4 +1,4 @@
-package java;
+package program;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,10 +20,6 @@ import java.util.List;
 
 public class ChessRules {
 
-    // Contains all the Masks used in the Process of saving the Board;
-
-
-    // Pieces:
     /**
      * This Constant is 0. It is used to clear a cell on a board for example if the piece moves away.
      */
@@ -81,11 +77,6 @@ public class ChessRules {
      * 0 on the MASK_PLAYER Bit.
      */
     public static final int PLAYER_BLACK = 0b0000_0000;
-
-    /**
-     * Which Player plays on the Bottom of the board. Default is PLAYER_WHITE.
-     */
-    private static int bottomPlayer = PLAYER_WHITE;
 
     /**
      * 0001 0000 - For each new piece this bit is set to 0. As soon as it moves it becomes one.
@@ -393,7 +384,7 @@ public class ChessRules {
     private static List<Integer> getPawnMoves(int[] board, int pos) {
         List<Integer> moves = new ArrayList<>();
         int player = board[pos] & MASK_PLAYER;
-        if (player == bottomPlayer) {
+        if (player == PLAYER_WHITE /* Bottom Player */) {
             if (pos - 8 >= 0) {
                 if (pos % 8 > 0) {
                     if ((board[pos - 9] & MASK_SET_FIELD) > 0 && (board[pos - 9] & MASK_PLAYER) != player) {
@@ -683,7 +674,7 @@ public class ChessRules {
         }
 
         // Check for Pawns
-        if (bottomPlayer == player) {
+        if (player == PLAYER_WHITE) {
             if (pos - 8 >= 0) {
                 if (pos % 8 > 0 && (board[pos - 9] & MASK_PLAYER) != player && (board[pos - 9] & MASK_PIECE) == PIECE_PAWN)
                     return true;
@@ -794,22 +785,6 @@ public class ChessRules {
             case PIECE_KING -> cost = 200;
         }
         return (piece & MASK_PLAYER) == PLAYER_WHITE ? cost : -cost;
-    }
-
-    /**
-     * Is being called from the GameObject. It sets the bottomPlayer to a specific value
-     * @param newBottomPlayer the player which will play on the bottom of the board.
-     */
-    public static void setBottomPlayer(int newBottomPlayer) {
-        bottomPlayer = newBottomPlayer;
-    }
-
-    /**
-     * The bottomPlayer of the board can be accessed globally.
-     * @return bottomPlayer
-     */
-    public static int getBottomPlayer() {
-        return bottomPlayer;
     }
 
     /**

@@ -1,6 +1,6 @@
-package java.players;
+package program.players;
 
-import java.guis.Gui;
+import program.guis.Gui;
 
 /**
  * The Class which is used in order to make a human play. In the Main-Method even two HumanPlayers can be assigned to the Game or no human at all.

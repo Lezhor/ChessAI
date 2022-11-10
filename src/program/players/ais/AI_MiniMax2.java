@@ -1,17 +1,19 @@
-package java.players.ais;
+package program.players.ais;
 
-import java.ChessRules;
-import java.players.Player;
+import program.ChessRules;
+import program.players.Player;
 
 import java.util.List;
 import java.util.Random;
 
 /**
- * <p>Version 1.0 of Chess-AI</p>
+ * <p>Version 2.0 of Chess-AI</p>
  * <p>MinMax is implemented, however no Alpha-Beta-Pruning yet. The Search-Depth is only 4 Layers</p>
- * <p>The board-Analyzer works only by means of the Board-Score, determined by the score of the pieces.</p>
+ * <p>The board-Analyzer works only by means of the Board-Score, determined by the score of the pieces.
+ * Also the position of the pawns and the king is calculated in (needed in the endgame)</p>
+ *
  */
-public class AI_MiniMax1 extends Player {
+public class AI_MiniMax2 extends Player {
 
     /**
      * The Search-Depth of the MiniMax-Algorithm. 4 Works well for this AI.
@@ -22,7 +24,7 @@ public class AI_MiniMax1 extends Player {
      * Constructor which initializes the player in the Superclass.
      * @param player Player which this AI will play.
      */
-    public AI_MiniMax1(int player) {
+    public AI_MiniMax2(int player) {
         super(player, "AI_1.0");
         SEARCH_DEPTH = 4;
     }
@@ -113,5 +115,26 @@ public class AI_MiniMax1 extends Player {
         return score;
     }
 
+    /**
+     * This method is called in the analyzeBoard()-Method and modifies the boards total score based on the pawns position.
+     *
+     * The further the pawn is to the end of the board, the higher the score.
+     * In the middle of the board it needs to be approximately 0, and on the start-pos it needs to be negative.
+     * @param board An int-array which stores all the piece-information. Item 0 is in the top left corner, Item 7 in the top right, Item 63 in the bottom right.
+     * @param weight The impact this modifier has on the total score.
+     * @param enemyPieceCountWeight The impact this modifier has on the total score based on the enemypiecesleft (The less pieces the more impact this score should have)
+     * @return The Score-Modifier
+     */
+    private float getScoreModifier_PawnPos(int[] board, float weight, float enemyPieceCountWeight) {
+        float scoreModifier = 0;
+        for (int i = 0; i < board.length; i++) {
+            if ((board[i] & ChessRules.MASK_SET_FIELD) > 0 && (board[i] & ChessRules.MASK_PIECE) == ChessRules.PIECE_PAWN) {
+                int player = board[i] & ChessRules.MASK_PLAYER;
+                // The scoreModifier needs to be updated here based on the Position of the pawn
+
+            }
+        }
+        return scoreModifier * weight;
+    }
 
 }
