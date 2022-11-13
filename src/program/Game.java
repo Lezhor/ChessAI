@@ -51,6 +51,7 @@ public class Game {
 
         initBoard();
         //initPos3();
+        //initPos4();
         pgnWriter = new PGNWriter(blackPlayer.PGN_NAME, whitePlayer.PGN_NAME);
         gui.printBoard(board);
         gameLoop();
@@ -67,7 +68,7 @@ public class Game {
             ChessRules.makeMove(board, player == ChessRules.PLAYER_WHITE ? whitePlayer.decideOnMove(board) : blackPlayer.decideOnMove(board));
             gui.printBoard(board);
             player = player ^ ChessRules.MASK_PLAYER;
-            if (ChessRules.noLegalMovesLeft(board, player)) {
+            if (ChessRules.noLegalMovesLeft(board, player) || ChessRules.countPieces(board) <= 2) {
                 gameOver = true;
             }
         }
@@ -89,6 +90,17 @@ public class Game {
         //setBottomPlayer(ChessRules.PLAYER_BLACK);
         initBottomRowPieces();
         initUpperRowPieces();
+    }
+
+    private void initPos4() {
+        board = new int[64];
+        board[4] = ChessRules.MASK_SET_FIELD | ChessRules.PLAYER_BLACK | ChessRules.PIECE_KING;
+        board[1] = ChessRules.MASK_SET_FIELD | ChessRules.MASK_HAS_MOVED | ChessRules.PLAYER_BLACK | ChessRules.PIECE_KNIGHT;
+        board[6] = ChessRules.MASK_SET_FIELD | ChessRules.MASK_HAS_MOVED | ChessRules.PLAYER_BLACK | ChessRules.PIECE_KNIGHT;
+        board[60] = ChessRules.MASK_SET_FIELD | ChessRules.PLAYER_WHITE | ChessRules.PIECE_KING;
+        for (int i = 0; i < 8; i++) {
+            board[55 - i] = ChessRules.MASK_SET_FIELD | ChessRules.PLAYER_WHITE | ChessRules.PIECE_PAWN;
+        }
     }
 
     private void initPos3() {

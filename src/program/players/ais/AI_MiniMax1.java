@@ -23,7 +23,7 @@ public class AI_MiniMax1 extends Player {
      * @param player Player which this AI will play.
      */
     public AI_MiniMax1(int player) {
-        super(player, "AI_1.0");
+        super(player, "AI MiniMax 1");
         SEARCH_DEPTH = 4;
     }
 

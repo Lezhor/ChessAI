@@ -799,4 +799,33 @@ public class ChessRules {
         }
     }
 
+    /**
+     * Counts the total number of pieces on the board (both Players)
+     * @param board The current board-Array
+     * @return Total number of pieces on the board
+     */
+    public static int countPieces(int[] board) {
+        int counter = 0;
+        for (int cell : board) {
+            if ((cell & MASK_SET_FIELD) > 0 )
+                counter++;
+        }
+        return counter;
+    }
+
+    /**
+     * Counts the number of the left pieces of one side.
+     * @param board The current board-Array
+     * @param player The player
+     * @return The number of pieces
+     */
+    public static int countPieces(int[] board, int player) {
+        int counter = 0;
+        for (int cell : board) {
+            if ((cell & MASK_SET_FIELD) > 0 && (cell & MASK_PLAYER) == player)
+                counter++;
+        }
+        return counter;
+    }
+
 }

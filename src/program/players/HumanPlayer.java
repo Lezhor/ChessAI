@@ -18,7 +18,7 @@ public class HumanPlayer extends Player {
      * @param gui Gui Object - The SAME one which is being used in the game.
      */
     public HumanPlayer(int player, Gui gui) {
-        super(player, "HumanPlayer");
+        super(player, "Human");
         this.gui = gui;
     }
 

@@ -3,6 +3,7 @@ package program;
 import program.guis.*;
 import program.guis.TerminalUI;
 import program.players.HumanPlayer;
+import program.players.Player;
 import program.players.ais.*;
 
 /**
@@ -21,45 +22,33 @@ public class Main {
      * @param args Args
      */
     public static void main(String[] args) {
-        startGameHumanvAI();
+        startTerminalGame(0, 2);
     }
 
-    /**
-     * Starts an AIvsAI game. Both AIs are Random-Players.
-     */
-    public static void startGameRANDOMvRANDOM() {
-        game = new Game(new AI_Random(ChessRules.PLAYER_WHITE), new AI_Random(ChessRules.PLAYER_BLACK), new TerminalUI(ChessRules.PLAYER_WHITE));
+    private static void startTerminalGame(int whitePlayer, int blackPlayer) {
+        startGame(whitePlayer, blackPlayer, new TerminalUI(blackPlayer == 0 && whitePlayer != 0 ? ChessRules.PLAYER_BLACK : ChessRules.PLAYER_WHITE));
     }
 
-    /**
-     * Starts an AIvsAI game. Both AIs are AIs of Version 1.0.
-     */
-    public static void startGameMINMAX1vMINMAX1() {
-        game = new Game(new AI_MiniMax1(ChessRules.PLAYER_WHITE), new AI_MiniMax1(ChessRules.PLAYER_BLACK), new TerminalUI(ChessRules.PLAYER_WHITE));
+    private static void startGame(int whitePlayer, int blackPlayer, Gui gui) {
+        Player player1, player2;
+        try {
+            player1 = getPlayer(true, whitePlayer, gui);
+            player2 = getPlayer(false, blackPlayer, gui);
+            System.out.println("Starting Game: \"" + player1.PGN_NAME + "\" vs \"" + player2.PGN_NAME + "\"\n");
+            game = new Game(player1, player2, gui);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
-    /**
-     * Starts a HUMANvsAI game. (Human is White Player)
-     */
-    public static void startGameHumanvAI() {
-        Gui gui = new TerminalUI(ChessRules.PLAYER_WHITE);
-        game = new Game(new HumanPlayer(ChessRules.PLAYER_WHITE, gui), new AI_MiniMax1(ChessRules.PLAYER_BLACK), gui);
-    }
-
-    /**
-     * Starts a HUMANvAI game. (Human is Black Player)
-     */
-    public static void startGameAIvHuman() {
-        Gui gui = new TerminalUI(ChessRules.PLAYER_BLACK);
-        game = new Game(new AI_MiniMax1(ChessRules.PLAYER_WHITE), new HumanPlayer(ChessRules.PLAYER_BLACK, gui), gui);
-    }
-
-    /**
-     * Starts HUMANvsHUMAN game
-     */
-    public static void startGameHumanvHuman() {
-        Gui gui = new TerminalUI(ChessRules.PLAYER_WHITE);
-        game =  new Game(new HumanPlayer(ChessRules.PLAYER_WHITE, gui), new HumanPlayer(ChessRules.PLAYER_BLACK, gui), gui);
+    private static Player getPlayer(boolean whitePlayer, int playerType, Gui gui) {
+        int playerColor = whitePlayer ? ChessRules.PLAYER_WHITE : ChessRules.PLAYER_BLACK;
+        return switch (playerType) {
+            case 0 -> new HumanPlayer(playerColor, gui);
+            case 1 -> new AI_MiniMax1(playerColor);
+            case 2 -> new AI_MiniMax2(playerColor);
+            default -> throw new IllegalArgumentException("Playertype: " + playerType + " not defined!");
+        };
     }
 
 }

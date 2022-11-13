@@ -42,7 +42,7 @@ public class PGNWriter {
         if (!fileName.endsWith(".pgn")) {
             fileName = fileName + ".pgn";
         }
-        setFilePath(fileName);
+        filePath = directoryPath + fileName;
         black = blackName;
         white = whiteName;
         beginPGNFile();
@@ -96,14 +96,6 @@ public class PGNWriter {
         //The SAN (Standard Algebraic Notation) of the move needs to be calculated here
 
         return san;
-    }
-
-    /**
-     * Sets the filePath to directoryPath + filename
-     * @param fileName The Name of the file with .pgn ending.
-     */
-    private void setFilePath(String fileName) {
-        filePath = directoryPath + fileName;
     }
 
 }
