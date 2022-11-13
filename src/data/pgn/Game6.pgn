@@ -1,0 +1,15 @@
+[Event "?"]
+[Site "?"]
+[Date "2022.11.13"]
+[White "AI MiniMax 2"]
+[Black "AI MiniMax 2"]
+[Result "0-1"]
+
+1. b2b3 c7c5 2. e2e4 Ng8h6 3. Nb1c3 Qd8a5 4. Bf1d3 Qa5b4 5. Qd1h5 g7g6 6. Qh5e5 f7f6
+7. Qe5c7 Nb8c6 8. Nc3d5 Qb4d4 9. Nd5f6 e7f6 10. c2c3 Qd4d3 11. e4e5 f6e5
+12. Ng1f3 Bf8d6 13. Qc7c8 Ra8c8 14. a2a4 Qd3e4 15. Ke1d1 Nc6a5 16. Ra1a3 Na5b3
+17. Ra3b3 Qe4a4 18. Nf3d4 c5d4 19. Kd1c2 d4c3 20. d2c3 Nh6g4 21. f2f4 Qa4e4
+22. Kc2d1 Qe4g2 23. Rh1e1 Qg2f3 24. Kd1c2 Qf3f2 25. Bc1d2 Qf2h2 26. f4e5 Bd6e5
+27. Re1e4 Qh2g2 28. Re4e1 O-O 29. Kc2c1 Be5d6 30. Rb3b5 a7a6 31. Rb5a5 Bd6g3
+32. Re1d1 Ng4f2 33. Ra5g5 Nf2d1 34. Kc1d1 Rf8f5 35. Rg5f5 g6f5 36. Kd1c1 Bg3e5
+37. c3c4 Qg2g1 38. Kc1c2 Rc8c5 39. Kc2b3 Qg1b1 40. Kb3a3 Rc5c4 41. Bd2c3 b7b5 42. Bc3b4 Qb1b2 0-1

@@ -3,6 +3,8 @@ package program;
 import program.guis.Gui;
 import program.players.*;
 
+import java.nio.file.FileAlreadyExistsException;
+
 public class Game {
 
     /**
@@ -52,7 +54,14 @@ public class Game {
         initBoard();
         //initPos3();
         //initPos4();
-        pgnWriter = new PGNWriter(blackPlayer.PGN_NAME, whitePlayer.PGN_NAME);
+        try {
+            pgnWriter = new PGNWriter();
+        } catch (FileAlreadyExistsException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+        pgnWriter.setWhite(whitePlayer.PGN_NAME)
+                .setBlack(blackPlayer.PGN_NAME);
         gui.printBoard(board);
         gameLoop();
     }
@@ -65,7 +74,9 @@ public class Game {
         int player = ChessRules.PLAYER_WHITE;
         boolean gameOver = false;
         while (!gameOver) {
-            ChessRules.makeMove(board, player == ChessRules.PLAYER_WHITE ? whitePlayer.decideOnMove(board) : blackPlayer.decideOnMove(board));
+            int move = player == ChessRules.PLAYER_WHITE ? whitePlayer.decideOnMove(board) : blackPlayer.decideOnMove(board);
+            pgnWriter.addMoveToFile(board, move);
+            ChessRules.makeMove(board, move);
             gui.printBoard(board);
             player = player ^ ChessRules.MASK_PLAYER;
             if (ChessRules.noLegalMovesLeft(board, player) || ChessRules.countPieces(board) <= 2) {
@@ -73,10 +84,11 @@ public class Game {
             }
         }
         if (ChessRules.playerInCheck(board, player)) {
-            gui.printWinner(player ^ ChessRules.MASK_PLAYER);
+            win(player ^ ChessRules.MASK_PLAYER);
         } else {
-            gui.printStalemate();
+            stalemate();
         }
+        pgnWriter.writeDataToFile();
     }
 
 
@@ -157,5 +169,16 @@ public class Game {
         for (int i = 48; i < 56; i++) {
             board[i] = pawn;
         }
+    }
+
+
+    private void win(int player) {
+        pgnWriter.setResultWinner(player);
+        gui.printWinner(player);
+    }
+
+    private void stalemate() {
+        pgnWriter.setResultStaleMate();
+        gui.printStalemate();
     }
 }

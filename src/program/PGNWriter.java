@@ -4,51 +4,64 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Objects;
 
 public class PGNWriter {
 
-    private final String directoryPath = "src/data/testpgn/";
+    private final String DIRECTORY_PATH = "src/data/testpgn/";
     private String filePath = "";
 
-    // Variables for PGN-File
+    private String event = "?", site = "?", date = "?", white = "?", black = "?", result = "?";
 
-    private String event = "?", site = "?", date = "?",
-            round = "?", white = "?", black = "?", result = "?";
+    private String fileBody = "";
+    private int moveCounter = 0;
 
-    public PGNWriter(String blackName, String whiteName) {
-        String fileName = "Test";
-        File directory = new File(directoryPath);
+    public PGNWriter() throws FileAlreadyExistsException {
+        String fileName = "";
+        File directory = new File(DIRECTORY_PATH);
         if (!directory.exists()) {
             directory.mkdirs();
         }
-        try {
-            fileName = "Game" + (Objects.requireNonNull(new File(directoryPath).list()).length + 1);
-        } catch (NullPointerException e) {
-            System.out.println("Directory is Empty");
-            fileName = "Game1";
-        }
-        new PGNWriter(fileName, blackName, whiteName);
+        int i = 0;
+        do {
+            i++;
+            try {
+                fileName = "Game" + (Objects.requireNonNull(new File(DIRECTORY_PATH).list()).length + i) + ".pgn";
+            } catch (NullPointerException e) {
+                System.out.println("Directory is Empty");
+                fileName = "Game1.pgn";
+            }
+            filePath = DIRECTORY_PATH + fileName;
+        } while (new File(filePath).exists());
+        setDate();
     }
 
     /**
      * Initializes the Writer
-     *
      * @param fileName  The Filename, without the directory-path.
-     * @param blackName The name of the black player.
-     * @param whiteName The name of the white player
      */
-    public PGNWriter(String fileName, String blackName, String whiteName) {
+    public PGNWriter(String fileName) throws FileAlreadyExistsException {
+        File directory = new File(DIRECTORY_PATH);
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
         if (!fileName.endsWith(".pgn")) {
             fileName = fileName + ".pgn";
         }
-        filePath = directoryPath + fileName;
-        black = blackName;
-        white = whiteName;
-        beginPGNFile();
+        filePath = DIRECTORY_PATH + fileName;
+        if (new File(filePath).exists()) {
+            throw new FileAlreadyExistsException("File '" + filePath + "' already exists!!!");
+        }
+        setDate();
     }
 
-    public void beginPGNFile() {
+    public void writeDataToFile() {
         try {
             File file = new File(filePath);
             if (file.exists()) {
@@ -61,13 +74,51 @@ public class PGNWriter {
             writer.write("[Event \"" + event + "\"]\n");
             writer.write("[Site \"" + site + "\"]\n");
             writer.write("[Date \"" + date + "\"]\n");
-            writer.write("[Round \"" + round + "\"]\n");
             writer.write("[White \"" + white + "\"]\n");
             writer.write("[Black \"" + black + "\"]\n");
             writer.write("[Result \"" + result + "\"]\n\n");
+            writer.write(fileBody + (result.equalsIgnoreCase("?") ? "" : " " + result));
             writer.close();
         } catch (IOException e) {
             System.out.println("PGN-File-Init failed with Filepath: \"" + filePath + "\"");
+        }
+    }
+
+    public PGNWriter setBlack(String black) {
+        this.black = black;
+        return this;
+    }
+
+    public PGNWriter setWhite(String white) {
+        this.white = white;
+        return this;
+    }
+
+    private void setDate() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy.MM.dd");
+        LocalDateTime today = LocalDateTime.now();
+        date = dtf.format(today);
+    }
+
+    public PGNWriter setEvent(String event) {
+        this.event = event;
+        return this;
+    }
+
+    public PGNWriter setSite(String site) {
+        this.site = site;
+        return this;
+    }
+
+    public void setResultStaleMate() {
+        result = "1/2-1/2";
+    }
+
+    public void setResultWinner(int winner) {
+        if (winner == ChessRules.PLAYER_WHITE) {
+            result = "1-0";
+        } else {
+            result = "0-1";
         }
     }
 
@@ -78,8 +129,20 @@ public class PGNWriter {
      * @param move  The move-integer. ChessRules.getMoveOldPos(move) and ChessRules.getMoveNewPos(move) can be used on it.
      */
     public void addMoveToFile(int[] board, int move) {
+        if (moveCounter % 12 == 0) {
+            fileBody += "\n";
+        } else {
+            fileBody += " ";
+        }
+        if (moveCounter == 0) {
+            fileBody = "1.";
+        } else if (moveCounter % 2 == 0) {
+            fileBody += ((moveCounter / 2) + 1) + ".";
+        }
         String san = getSAN(board, move);
-        // Append the san-move to the file
+        fileBody += san;
+        moveCounter++;
+        writeDataToFile();
     }
 
     /**
@@ -89,13 +152,47 @@ public class PGNWriter {
      * @return SAN-String of move.
      */
     private String getSAN(int[] board, int move) {
-        String san = "";
         int oldPos = ChessRules.getMoveOldPos(move);
         int newPos = ChessRules.getMoveNewPos(move);
+        if ((board[oldPos] & ChessRules.MASK_PIECE) == ChessRules.PIECE_KING) {
+            if (newPos - oldPos == 2) {
+                return "O-O";
+            } else if (oldPos - newPos == 2) {
+                return "O-O-O";
+            }
+        }
 
-        //The SAN (Standard Algebraic Notation) of the move needs to be calculated here
+        return getPieceLetter(board[oldPos]) + posToString(oldPos) + posToString(newPos);
+    }
 
-        return san;
+    private String getPieceLetter(int piece) {
+        return switch (piece & ChessRules.MASK_PIECE) {
+            default -> "";
+            case ChessRules.PIECE_KNIGHT -> "N";
+            case ChessRules.PIECE_BISHOP -> "B";
+            case ChessRules.PIECE_ROOK -> "R";
+            case ChessRules.PIECE_QUEEN -> "Q";
+            case ChessRules.PIECE_KING -> "K";
+        };
+    }
+
+    private String posToString(int pos) {
+        if (pos < 0) {
+            throw new IndexOutOfBoundsException("Position negative");
+        } else if (pos > 63) {
+            throw new IndexOutOfBoundsException("Position greater than 63");
+        }
+        return switch (pos % 8) {
+            case 0 -> "a";
+            case 1 -> "b";
+            case 2 -> "c";
+            case 3 -> "d";
+            case 4 -> "e";
+            case 5 -> "f";
+            case 6 -> "g";
+            case 7 -> "h";
+            default -> "";
+        } + (8 - ((int) Math.floor(pos / 8f)));
     }
 
 }
