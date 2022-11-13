@@ -18,7 +18,16 @@ public class PGNWriter {
 
     public PGNWriter(String blackName, String whiteName) {
         String fileName = "Test";
-        fileName = "Game" + (Objects.requireNonNull(new File(directoryPath).list()).length + 1);
+        File directory = new File(directoryPath);
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+        try {
+            fileName = "Game" + (Objects.requireNonNull(new File(directoryPath).list()).length + 1);
+        } catch (NullPointerException e) {
+            System.out.println("Directory is Empty");
+            fileName = "Game1";
+        }
         new PGNWriter(fileName, blackName, whiteName);
     }
 
