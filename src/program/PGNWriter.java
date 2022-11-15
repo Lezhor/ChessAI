@@ -14,7 +14,7 @@ import java.util.Objects;
 
 public class PGNWriter {
 
-    private final String DIRECTORY_PATH = "src/data/testpgn/";
+    private final String DIRECTORY_PATH = "src/data/pgn2/";
     private String filePath = "";
 
     private String event = "?", site = "?", date = "?", white = "?", black = "?", result = "?";
@@ -152,6 +152,7 @@ public class PGNWriter {
      * @return SAN-String of move.
      */
     private String getSAN(int[] board, int move) {
+        String san = "";
         int oldPos = ChessRules.getMoveOldPos(move);
         int newPos = ChessRules.getMoveNewPos(move);
         if ((board[oldPos] & ChessRules.MASK_PIECE) == ChessRules.PIECE_KING) {
@@ -162,7 +163,16 @@ public class PGNWriter {
             }
         }
 
-        return getPieceLetter(board[oldPos]) + posToString(oldPos) + posToString(newPos);
+        san += getPieceLetter(board[oldPos]);
+        san += posToString(oldPos);
+        if ((board[newPos] & ChessRules.MASK_SET_FIELD) > 0) {
+            san += "x";
+        }
+        san += posToString(newPos);
+        if ((board[oldPos] & ChessRules.MASK_PIECE) == ChessRules.PIECE_PAWN && ((int) Math.floor(newPos / 8f)) % 7 == 0) {
+            san += "=Q";
+        }
+        return san;
     }
 
     private String getPieceLetter(int piece) {
