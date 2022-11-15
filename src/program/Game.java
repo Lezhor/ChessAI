@@ -77,6 +77,7 @@ public class Game {
             int move = player == ChessRules.PLAYER_WHITE ? whitePlayer.decideOnMove(board) : blackPlayer.decideOnMove(board);
             pgnWriter.addMoveToFile(board, move);
             ChessRules.makeMove(board, move);
+            System.out.print("|");
             gui.printBoard(board);
             player = player ^ ChessRules.MASK_PLAYER;
             if (ChessRules.noLegalMovesLeft(board, player) || ChessRules.countPieces(board) <= 2) {
@@ -88,6 +89,7 @@ public class Game {
         } else {
             stalemate();
         }
+        System.out.println("\n\n");
         pgnWriter.writeDataToFile();
     }
 

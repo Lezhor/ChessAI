@@ -22,11 +22,22 @@ public class Main {
      * @param args Args
      */
     public static void main(String[] args) {
-        startTerminalGame(0, 2);
+        startNoGuiGame(2, 1);
     }
 
     private static void startTerminalGame(int whitePlayer, int blackPlayer) {
         startGame(whitePlayer, blackPlayer, new TerminalUI(blackPlayer == 0 && whitePlayer != 0 ? ChessRules.PLAYER_BLACK : ChessRules.PLAYER_WHITE));
+    }
+
+    private static void startNoGuiGame(int whitePlayer, int blackPlayer) {
+        startGame(whitePlayer, blackPlayer, new NoGui());
+    }
+
+    private static void runNoUiGames(int amount) {
+        for (int i = 1; i <= amount; i++) {
+            System.out.println("Running Game " + i + ":");
+            startNoGuiGame(2, 2);
+        }
     }
 
     private static void startGame(int whitePlayer, int blackPlayer, Gui gui) {
@@ -47,6 +58,7 @@ public class Main {
             case 0 -> new HumanPlayer(playerColor, gui);
             case 1 -> new AI_MiniMax1(playerColor);
             case 2 -> new AI_MiniMax2(playerColor);
+            case 3 -> new AI_MiniMax3(playerColor);
             default -> throw new IllegalArgumentException("Playertype: " + playerType + " not defined!");
         };
     }
