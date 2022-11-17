@@ -1,9 +1,6 @@
 package program;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.FileAlreadyExistsException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -11,10 +8,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 public class PGNWriter {
 
-    private final String DIRECTORY_PATH = "src/data/pgn2/";
+    private final String DIRECTORY_PATH = "src/data/testpgn/";
     private String filePath = "";
 
     private String event = "?", site = "?", date = "?", white = "?", black = "?", result = "?";
@@ -203,6 +201,50 @@ public class PGNWriter {
             case 7 -> "h";
             default -> "";
         } + (8 - ((int) Math.floor(pos / 8f)));
+    }
+
+    public static int[] getBoardFromFen(String fen) throws IllegalArgumentException{
+        int[] board = new int[64];
+        String[] fenParts = fen.split(" ");
+        if (fenParts.length != 6)
+            throw new IllegalArgumentException("FEN-Notation has to consist of 6 Strings split by a space");
+        String[] rows = fenParts[0].split("/");
+        if (rows.length != 8)
+            throw new IllegalArgumentException("Wrong number of Rows");
+        int pos = 0;
+        for (String row : rows) {
+            for (String fenLetter : row.split("")) {
+                int piece = getPieceFEN(fenLetter);
+                if (piece == -1) {
+                    try {
+                        pos += Integer.parseInt(fenLetter);
+                    } catch (NumberFormatException e) {
+                        throw new IllegalArgumentException();
+                    }
+                } else {
+                    board[pos] = piece;
+                    pos++;
+                }
+            }
+        }
+        return board;
+    }
+    public static int getPieceFEN(String fenLetter) {
+        int ret =  switch (fenLetter.toUpperCase()) {
+            case "P" -> ChessRules.PIECE_PAWN;
+            case "N" -> ChessRules.PIECE_KNIGHT;
+            case "B" -> ChessRules.PIECE_BISHOP;
+            case "R" -> ChessRules.PIECE_ROOK;
+            case "Q" -> ChessRules.PIECE_QUEEN;
+            case "K" -> ChessRules.PIECE_KING;
+            default -> -1;
+        };
+        if (ret == -1)
+            return ret;
+        if (fenLetter.equals(fenLetter.toUpperCase())) {
+            ret = ret | ChessRules.PLAYER_WHITE;
+        }
+        return ret | ChessRules.MASK_SET_FIELD | ChessRules.MASK_HAS_MOVED;
     }
 
 }

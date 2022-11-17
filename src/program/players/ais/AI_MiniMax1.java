@@ -3,6 +3,7 @@ package program.players.ais;
 import program.ChessRules;
 import program.players.Player;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -39,7 +40,7 @@ public class AI_MiniMax1 extends Player {
         Random r = new Random();
 
         float bestScore = (player == ChessRules.PLAYER_WHITE) ? -1000000000 : 1000000000;
-        int bestMove = 0;
+        List<Integer> bestMoves = new ArrayList<>();
         int[] backUpBoard;
 
         for (int move : moves) {
@@ -47,15 +48,16 @@ public class AI_MiniMax1 extends Player {
             ChessRules.makeMove(backUpBoard, move);
             float score = minimax(backUpBoard, SEARCH_DEPTH, player ^ ChessRules.MASK_PLAYER);
             if (score == bestScore && r.nextInt(7) == 0) {
-                bestMove = move;
+                bestMoves.add(move);
             } else if (player == ChessRules.PLAYER_WHITE && score > bestScore || player == ChessRules.PLAYER_BLACK && score < bestScore) {
                 bestScore = score;
-                bestMove = move;
+                bestMoves = new ArrayList<>();
+                bestMoves.add(move);
             }
 
         }
-
-        return bestMove;
+        //System.out.println("Possible best moves: " + bestMoves.size());
+        return bestMoves.get(r.nextInt(bestMoves.size()));
     }
 
     /**

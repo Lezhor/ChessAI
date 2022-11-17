@@ -51,6 +51,7 @@ public class Game {
         this.blackPlayer = blackPlayer;
         this.gui = gui;
 
+        //initBoard("rn3bnr/p1p2k2/P2pp1pp/1P3p2/2PPb2q/8/3N1PPP/R1BQKBNR w KQ - 0 13");
         initBoard();
         //initPos3();
         //initPos4();
@@ -125,6 +126,62 @@ public class Game {
         board[47] = ChessRules.MASK_SET_FIELD | ChessRules.MASK_HAS_MOVED | ChessRules.PLAYER_BLACK | ChessRules.PIECE_KING;
         board[52] = ChessRules.MASK_SET_FIELD | ChessRules.MASK_HAS_MOVED | ChessRules.PLAYER_BLACK | ChessRules.PIECE_QUEEN;
         board[53] = ChessRules.MASK_SET_FIELD | ChessRules.MASK_HAS_MOVED | ChessRules.PLAYER_WHITE | ChessRules.PIECE_KING;
+    }
+
+    private void initBoard(String FEN) {
+        board = PGNWriter.getBoardFromFen(FEN);
+    }
+
+    private void setPieceBlack(String cell, int pieceType) {
+        setPiece(cell, pieceType, ChessRules.PLAYER_BLACK);
+    }
+    private void setPieceWhite(String cell, int pieceType) {
+        setPiece(cell, pieceType, ChessRules.PLAYER_WHITE);
+    }
+    private void setPiece(String cell, int pieceType, int player) {
+        boolean hasMoved = !((pieceType & ChessRules.MASK_PIECE) == ChessRules.PIECE_PAWN && ((player == ChessRules.PLAYER_WHITE && ((int)Math.floor(getPosFromString(cell) / 8f)) == 6) || (player == ChessRules.PLAYER_BLACK && ((int)Math.floor(getPosFromString(cell) / 8f)) == 1)));
+        setPiece(cell, pieceType, player, hasMoved);
+    }
+    private void setPiece(String cell, int pieceType, int player, boolean hasMoved) {
+        setPiece(cell, pieceType, player, hasMoved, false);
+    }
+    private void setPiece(String cell, int pieceType, int player, boolean hasMoved, boolean pawnDoubleJump) {
+        int piece = pieceType | player | ChessRules.MASK_SET_FIELD;
+        if (hasMoved)
+            piece = piece | ChessRules.MASK_HAS_MOVED;
+        if (pawnDoubleJump)
+            piece = piece | ChessRules.MASK_PAWN_DOUBLE_JUMP;
+        try {
+            board[getPosFromString(cell)] = piece;
+        } catch (IllegalArgumentException ignored) {
+
+        }
+    }
+
+    public int getPosFromString(String stringPos) throws IllegalArgumentException {
+        if (stringPos.length() != 2) {
+            throw new IllegalArgumentException();
+        }
+        char char1 = stringPos.toLowerCase().charAt(0);
+        int pos = switch (char1) {
+            case 'a' -> 0;
+            case 'b' -> 1;
+            case 'c' -> 2;
+            case 'd' -> 3;
+            case 'e' -> 4;
+            case 'f' -> 5;
+            case 'g' -> 6;
+            case 'h' -> 7;
+            default -> -1;
+        };
+        if (pos == -1)
+            throw new IllegalArgumentException();
+        try {
+            pos += (8 - Integer.parseInt(stringPos.substring(1))) * 8;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException();
+        }
+        return pos;
     }
 
     /**

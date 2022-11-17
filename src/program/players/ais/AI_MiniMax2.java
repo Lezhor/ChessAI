@@ -3,6 +3,7 @@ package program.players.ais;
 import program.ChessRules;
 import program.players.Player;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -25,7 +26,7 @@ public class AI_MiniMax2 extends Player {
      */
     public AI_MiniMax2(int player) {
         super(player, "AI2 AlphaBeta");
-        SEARCH_DEPTH = 4;
+        SEARCH_DEPTH = 5;
     }
 
     /**
@@ -35,28 +36,29 @@ public class AI_MiniMax2 extends Player {
      */
     @Override
     public int decideOnMove(int[] board) {
-        List<Integer> moves = ChessRules.getLegalMoves(board, player);
+        List<Integer> moves = ChessRules.getLegalMovesSorted(board, player);
 
         Random r = new Random();
 
         float bestScore = (player == ChessRules.PLAYER_WHITE) ? -1000000000 : 1000000000;
-        int bestMove = 0;
+        List<Integer> bestMoves = new ArrayList<>();
         int[] backUpBoard;
 
         for (int move : moves) {
             backUpBoard = board.clone();
             ChessRules.makeMove(backUpBoard, move);
-            float score = minimax(backUpBoard, (player == ChessRules.PLAYER_WHITE) ? bestScore : -1000000000, (player == ChessRules.PLAYER_WHITE) ? 1000000000 : bestMove, SEARCH_DEPTH, player ^ ChessRules.MASK_PLAYER);
-            if (score == bestScore && r.nextInt(7) == 0) {
-                bestMove = move;
+            float score = minimax(backUpBoard, (player == ChessRules.PLAYER_WHITE) ? bestScore : -1000000000, (player == ChessRules.PLAYER_WHITE) ? 1000000000 : bestScore, SEARCH_DEPTH, player ^ ChessRules.MASK_PLAYER);
+            if (bestScore == score && r.nextInt(7) == 0) {
+                bestMoves.add(move);
             } else if (player == ChessRules.PLAYER_WHITE && score > bestScore || player == ChessRules.PLAYER_BLACK && score < bestScore) {
                 bestScore = score;
-                bestMove = move;
+                bestMoves = new ArrayList<>();
+                bestMoves.add(move);
             }
 
         }
-
-        return bestMove;
+        //System.out.println("Possible best moves: " + bestMoves.size());
+        return bestMoves.get(r.nextInt(bestMoves.size()));
     }
 
     /**
@@ -77,7 +79,7 @@ public class AI_MiniMax2 extends Player {
         }
 
         float bestScore = (player == ChessRules.PLAYER_WHITE ? -10000000 - depth : 10000000 + depth);
-        List<Integer> moves = ChessRules.getLegalMoves(board, player);
+        List<Integer> moves = ChessRules.getLegalMovesSorted(board, player);
 
         int[] backUpBoard;
 
@@ -85,17 +87,17 @@ public class AI_MiniMax2 extends Player {
             backUpBoard = board.clone();
             ChessRules.makeMove(backUpBoard, move);
             float score = minimax(backUpBoard, a, b, depth - 1, player ^ ChessRules.MASK_PLAYER);
-            if (player == ChessRules.PLAYER_WHITE && score > bestScore) {
-                bestScore = score;
-                if (bestScore >= b) {
-                    // Beta-Cutoff
-                    return 10000000;
+            if (player == ChessRules.PLAYER_WHITE) {
+                bestScore = Math.max(bestScore, score);
+                a = Math.max(bestScore, a);
+                if (a > b) {
+                    break;
                 }
-            } else if (player == ChessRules.PLAYER_BLACK && score < bestScore) {
-                bestScore = score;
-                if (bestScore <= a) {
-                    // Alpha-Cutoff
-                    return -10000000;
+            } else if (player == ChessRules.PLAYER_BLACK) {
+                bestScore = Math.min(bestScore, score);
+                b = Math.min(bestScore, b);
+                if (b < a) {
+                    break;
                 }
             }
         }

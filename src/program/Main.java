@@ -22,7 +22,7 @@ public class Main {
      * @param args Args
      */
     public static void main(String[] args) {
-        startNoGuiGame(2, 1);
+        startTerminalGame(0, 2);
     }
 
     private static void startTerminalGame(int whitePlayer, int blackPlayer) {
@@ -36,7 +36,7 @@ public class Main {
     private static void runNoUiGames(int amount) {
         for (int i = 1; i <= amount; i++) {
             System.out.println("Running Game " + i + ":");
-            startNoGuiGame(2, 2);
+            startNoGuiGame(1, 2);
         }
     }
 
@@ -58,7 +58,6 @@ public class Main {
             case 0 -> new HumanPlayer(playerColor, gui);
             case 1 -> new AI_MiniMax1(playerColor);
             case 2 -> new AI_MiniMax2(playerColor);
-            case 3 -> new AI_MiniMax3(playerColor);
             default -> throw new IllegalArgumentException("Playertype: " + playerType + " not defined!");
         };
     }

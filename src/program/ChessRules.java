@@ -260,6 +260,25 @@ public class ChessRules {
     }
 
     /**
+     *
+     * @param board
+     * @param player
+     * @return
+     */
+    public static List<Integer> getLegalMovesSorted(int[] board, int player) {
+        List<Integer> moves = getLegalMoves(board, player);
+        List<Integer> sortedMoves = new ArrayList<>();
+        for (int i = 0; i < moves.size(); i++) {
+            if ((board[getMoveNewPos(moves.get(i))] & MASK_SET_FIELD) > 0) {
+                sortedMoves.add(moves.remove(i));
+                i--;
+            }
+        }
+        sortedMoves.addAll(moves);
+        return sortedMoves;
+    }
+
+    /**
      * Gets All Knight-Moves from a specific position. Also gets the color of the Knight needed for this on its own.
      * In this method it is not yet checked, if as the result of the move the players king gets in check.
      * @param board Current Board

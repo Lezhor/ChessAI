@@ -54,7 +54,7 @@ public class TerminalUI extends Gui {
         if (bottomPlayer == ChessRules.PLAYER_WHITE) {
             System.out.println("\n           " + "A" + s + "B" + s + "C" + s + "D" + s + "E" + s + "F" + s + "G" + s + "H");
         } else {
-            System.out.println("\n           " + "H" + s + "G" + s + "G" + s + "E" + s + "D" + s + "C" + s + "B" + s + "A");
+            System.out.println("\n           " + "H" + s + "G" + s + "F" + s + "E" + s + "D" + s + "C" + s + "B" + s + "A");
         }
 
         float score = 0f;
