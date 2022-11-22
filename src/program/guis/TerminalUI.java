@@ -1,9 +1,7 @@
 package program.guis;
 
 import program.ChessRules;
-import program.players.HumanPlayer;
-import program.players.Player;
-import program.players.ais.AI_MiniMax2;
+import program.players.ais.AI2_AlphaBeta;
 
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -59,7 +57,7 @@ public class TerminalUI extends Gui {
 
         float score = 0f;
         for (int cell : board) {
-            score += AI_MiniMax2.analyzeBoard(board);
+            score += AI2_AlphaBeta.analyzeBoard(board);
         }
         System.out.println("\nScore: " + score);
     }

@@ -22,7 +22,7 @@ public class Main {
      * @param args Args
      */
     public static void main(String[] args) {
-        startTerminalGame(0, 2);
+        startTerminalGame(0, 3);
     }
 
     private static void startTerminalGame(int whitePlayer, int blackPlayer) {
@@ -36,7 +36,7 @@ public class Main {
     private static void runNoUiGames(int amount) {
         for (int i = 1; i <= amount; i++) {
             System.out.println("Running Game " + i + ":");
-            startNoGuiGame(1, 2);
+            startNoGuiGame(2, 3);
         }
     }
 
@@ -56,8 +56,9 @@ public class Main {
         int playerColor = whitePlayer ? ChessRules.PLAYER_WHITE : ChessRules.PLAYER_BLACK;
         return switch (playerType) {
             case 0 -> new HumanPlayer(playerColor, gui);
-            case 1 -> new AI_MiniMax1(playerColor);
-            case 2 -> new AI_MiniMax2(playerColor);
+            case 1 -> new AI1_MiniMax(playerColor);
+            case 2 -> new AI2_AlphaBeta(playerColor);
+            case 3 -> new AI3_PosAna(playerColor);
             default -> throw new IllegalArgumentException("Playertype: " + playerType + " not defined!");
         };
     }

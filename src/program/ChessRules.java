@@ -260,10 +260,11 @@ public class ChessRules {
     }
 
     /**
-     *
-     * @param board
-     * @param player
-     * @return
+     * <p>Calls the getLegalMoves() method and sorts by, which one is more likely to be a good move</p>
+     * <p>For now it just prioritizes all moves that capture a piece over the ones that do not</p>
+     * @param board Board-Position (In order to check if the move captures a piece or not)
+     * @param player The current player that has to make a move
+     * @return Sortet List of possible moves.
      */
     public static List<Integer> getLegalMovesSorted(int[] board, int player) {
         List<Integer> moves = getLegalMoves(board, player);
@@ -285,7 +286,7 @@ public class ChessRules {
      * @param pos The Position of the Knight
      * @return A List of all possible moves.
      */
-    private static List<Integer> getKnightMoves(int[] board, int pos) {
+    public static List<Integer> getKnightMoves(int[] board, int pos) {
         List<Integer> moves = new ArrayList<>();
         int player = board[pos] & MASK_PLAYER;
         if (pos % 8 < 7) {
@@ -322,7 +323,7 @@ public class ChessRules {
      * @param pos The Position of the Bishop.
      * @return A List of all possible moves.
      */
-    private static List<Integer> getBishopMoves(int[] board, int pos) {
+    public static List<Integer> getBishopMoves(int[] board, int pos) {
         List<Integer> moves = new ArrayList<>();
         int player = board[pos] & MASK_PLAYER;
         // TopRight
@@ -363,7 +364,7 @@ public class ChessRules {
      * @param pos The Position of the Rook.
      * @return A List of all possible moves.
      */
-    private static List<Integer> getRookMoves(int[] board, int pos) {
+    public static List<Integer> getRookMoves(int[] board, int pos) {
         List<Integer> moves = new ArrayList<>();
         int player = board[pos] & MASK_PLAYER;
         for (int i = pos + 1; i % 8 > 0; i++) {
@@ -400,7 +401,7 @@ public class ChessRules {
      * @param pos The Position of the Pawn
      * @return A List of all possible moves.
      */
-    private static List<Integer> getPawnMoves(int[] board, int pos) {
+    public static List<Integer> getPawnMoves(int[] board, int pos) {
         List<Integer> moves = new ArrayList<>();
         int player = board[pos] & MASK_PLAYER;
         if (player == PLAYER_WHITE /* Bottom Player */) {
@@ -458,7 +459,7 @@ public class ChessRules {
      * @param pos The Position of the Queen.
      * @return A List of all possible moves.
      */
-    private static List<Integer> getQueenMoves(int[] board, int pos) {
+    public static List<Integer> getQueenMoves(int[] board, int pos) {
         List<Integer> moves = new ArrayList<>();
         moves.addAll(getRookMoves(board, pos));
         moves.addAll(getBishopMoves(board, pos));
@@ -472,7 +473,7 @@ public class ChessRules {
      * @param pos The Position of the Knight
      * @return A List of all possible moves.
      */
-    private static List<Integer> getKingMoves(int[] board, int pos) {
+    public static List<Integer> getKingMoves(int[] board, int pos) {
         List<Integer> moves = new ArrayList<>();
         int player = board[pos] & MASK_PLAYER;
         boolean inCheck = false;
@@ -786,6 +787,16 @@ public class ChessRules {
     }
 
     /**
+     *
+     * @param board
+     * @param move
+     * @return
+     */
+    public static boolean isCastlingMove(int[] board, int move) {
+        return (board[getMoveOldPos(move)] & MASK_PIECE) == PIECE_KING && Math.abs((getMoveOldPos(move) - getMoveNewPos(move)) % 8) > 1;
+    }
+
+    /**
      * <p>Returns cost of a specific piece, for example 10 for Queen, 1 for Pawn etc.</p>
      * <p>Also the value is negative if the pieces color is black</p>
      * @param piece The input needs to be the cell-value from the board array. NOT masked with MASK_PIECE.
@@ -847,4 +858,15 @@ public class ChessRules {
         return counter;
     }
 
+    public static int distanceToEdge(int pos) {
+        return Math.min(distanceToEdge_TopBottom(pos), distanceToEdge_Side(pos));
+    }
+
+    public static int distanceToEdge_Side(int pos) {
+        return Math.min(pos % 8, 7 - (pos % 8));
+    }
+
+    public static int distanceToEdge_TopBottom(int pos) {
+        return Math.min((int) Math.floor(pos / 8f), 7 - (int) Math.floor(pos / 8f));
+    }
 }

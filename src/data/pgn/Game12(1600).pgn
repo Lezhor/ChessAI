@@ -1,0 +1,13 @@
+[Event "?"]
+[Site "?"]
+[Date "2022.11.22"]
+[White "chess.io(1600)"]
+[Black "AI3 PiecePos-Analyzing"]
+[Result "0-1"]
+
+1.Ng1f3 d7d5 2.d2d4 Bc8f5 3.c2c4 d5xc4 4.e2e4 Bf5xe4 5.Nb1c3 Be4d3 6.Bf1xd3 c4xd3
+7.O-O Qd8d6 8.Rf1e1 Qd6a6 9.Nf3e5 Nb8d7 10.Bc1g5 Nd7xe5 11.d4xe5 h7h6 12.Bg5d2 Ra8d8
+13.e5e6 Qa6c6 14.Qd1h5 g7g6 15.e6xf7 Ke8xf7 16.Qh5e5 Bf8g7 17.Qe5e3 Bg7d4 18.Qe3xd3 Bd4xf2
+19.Kg1xf2 Rd8xd3 20.Bd2e3 Ng8f6 21.Kf2g1 a7a5 22.Ra1c1 Qc6d6 23.h2h3 Kf7g7 24.Nc3b5 Qd6b4
+25.Nb5xc7 Qb4xb2 26.Nc7e6 Kg7f7 27.a2a4 Rd3xe3 28.Ne6f4 Re3xe1 29.Rc1xe1 Qb2d4 30.Kg1h1 Qd4xf4
+31.Re1b1 Rh8d8 32.Kh1g1 Rd8d2 33.Rb1f1 Qf4g3 34.Rf1xf6 e7xf6 35.Kg1h1 Qg3xg2 0-1

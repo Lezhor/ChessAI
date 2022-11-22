@@ -12,7 +12,7 @@ import java.util.Random;
  * <p>MinMax is implemented, however no Alpha-Beta-Pruning yet. The Search-Depth is only 4 Layers</p>
  * <p>The board-Analyzer works only by means of the Board-Score, determined by the score of the pieces.</p>
  */
-public class AI_MiniMax1 extends Player {
+public class AI1_MiniMax extends Player {
 
     /**
      * The Search-Depth of the MiniMax-Algorithm. 4 Works well for this AI.
@@ -23,7 +23,7 @@ public class AI_MiniMax1 extends Player {
      * Constructor which initializes the player in the Superclass.
      * @param player Player which this AI will play.
      */
-    public AI_MiniMax1(int player) {
+    public AI1_MiniMax(int player) {
         super(player, "AI MiniMax 1");
         SEARCH_DEPTH = 4;
     }

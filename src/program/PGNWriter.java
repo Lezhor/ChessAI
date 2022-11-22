@@ -12,14 +12,35 @@ import java.util.stream.Stream;
 
 public class PGNWriter {
 
+    /**
+     * Ends with a '/'.
+     */
     private final String DIRECTORY_PATH = "src/data/testpgn/";
+
+    /**
+     * Gets set to DIRECTORY_PATH + fileName specified in Constructor
+     */
     private String filePath = "";
 
+    /**
+     * Data in the beginning of the PGN-File
+     */
     private String event = "?", site = "?", date = "?", white = "?", black = "?", result = "?";
 
+    /**
+     * The part of the file which contains the actual gameplay.
+     */
     private String fileBody = "";
+
+    /**
+     * Used for printing the Turn-Numbers in the fileBody
+     */
     private int moveCounter = 0;
 
+    /**
+     * Calls the PGNWriter(String)-Constructor
+     * @throws FileAlreadyExistsException
+     */
     public PGNWriter() throws FileAlreadyExistsException {
         String fileName = "";
         File directory = new File(DIRECTORY_PATH);
@@ -42,7 +63,7 @@ public class PGNWriter {
 
     /**
      * Initializes the Writer
-     * @param fileName  The Filename, without the directory-path.
+     * @param fileName The Filename, without the directory-path.
      */
     public PGNWriter(String fileName) throws FileAlreadyExistsException {
         File directory = new File(DIRECTORY_PATH);
@@ -59,6 +80,9 @@ public class PGNWriter {
         setDate();
     }
 
+    /**
+     * Creates new file specified in filePath (if it already exists it deletes it first!) And then writes all data it already got to the file. Even not finished games. Indeed it gets called every move.
+     */
     public void writeDataToFile() {
         try {
             File file = new File(filePath);
@@ -121,8 +145,7 @@ public class PGNWriter {
     }
 
     /**
-     * Converts the move into a SAN-Move (Standard Algebraic Notation)
-     *
+     * Converts the move into the SAN-Notation using the getSAN()-Method and afterwards saves the result in the fileBody-String
      * @param board The board-Array, the one BEFORE the move was taken. It is necessary in order to determine if the move is a capture or not.
      * @param move  The move-integer. ChessRules.getMoveOldPos(move) and ChessRules.getMoveNewPos(move) can be used on it.
      */
@@ -147,7 +170,7 @@ public class PGNWriter {
      * Converts a move from the integer to the SAN-String.
      * @param board The board-Array before the move was played.
      * @param move The move-integer. ChessRules.getMoveOldPos(move) and ChessRules.getMoveNewPos(move) can be used on it.
-     * @return SAN-String of move.
+     * @return SAN-Notation of move.
      */
     private String getSAN(int[] board, int move) {
         String san = "";
@@ -173,6 +196,11 @@ public class PGNWriter {
         return san;
     }
 
+    /**
+     * Converts a given Piece into the letter from SAN-Notation e.g. "B" for Bishop or "" for Pawn.
+     * @param piece The Piece specified in ChessRules.MASK_PIECE
+     * @return The SAN-Letter
+     */
     private String getPieceLetter(int piece) {
         return switch (piece & ChessRules.MASK_PIECE) {
             default -> "";
