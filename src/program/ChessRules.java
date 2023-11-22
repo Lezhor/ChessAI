@@ -793,7 +793,7 @@ public class ChessRules {
      * @return
      */
     public static boolean isCastlingMove(int[] board, int move) {
-        return (board[getMoveOldPos(move)] & MASK_PIECE) == PIECE_KING && Math.abs((getMoveOldPos(move) - getMoveNewPos(move)) % 8) > 1;
+        return (board[getMoveOldPos(move)] & MASK_PIECE) == PIECE_KING && Math.abs(getMoveOldPos(move) - getMoveNewPos(move)) > 1 && Math.abs(getMoveOldPos(move) - getMoveNewPos(move)) < 6;
     }
 
     /**

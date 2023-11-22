@@ -1,0 +1,8 @@
+[Event "?"]
+[Site "?"]
+[Date "2022.12.08"]
+[White "AI MiniMax 1"]
+[Black "AI MiniMax 1"]
+[Result "?"]
+
+1.e2e4 h7h6 2.Bf1c4 Nb8c6

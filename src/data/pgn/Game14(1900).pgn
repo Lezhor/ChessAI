@@ -1,0 +1,14 @@
+[Event "?"]
+[Site "?"]
+[Date "2022.11.23"]
+[White "chess.com (ELO: 1900)"]
+[Black "AI3 PiecePos-Analyzing"]
+[Result "1/2-1/2]
+
+1.d2d4 e7e6 2.e2e4 d7d5 3.e4xd5 Qd8xd5 4.Ng1f3 Qd5e4 5.Qd1e2 Ng8f6 6.Nb1c3 Bf8b4
+7.a2a3 Qe4xe2 8.Bf1xe2 Bb4xc3 9.b2xc3 Nf6e4 10.c3c4 Ne4c3 11.Bc1f4 Nc3xe2 12.Ke1xe2 Nb8c6
+13.Bf4xc7 b7b6 14.d4d5 e6xd5 15.c4xd5 Ke8d7 16.Bc7f4 Nc6e7 17.Rh1d1 Bc8a6 18.Ke2e1 Ne7g6
+19.Nf3e5 Ng6xe5 20.Bf4xe5 Rh8e8 21.f2f4 f7f6 22.Ke1f2 f6xe5 23.Kf2e3 e5xf4 24.Ke3xf4 Re8e2
+25.Ra1c1 Re2xg2 26.Rd1g1 Ra8f8 27.Kf4e5 Rg2e2 28.Ke5d4 g7g6 29.Kd4c3 Kd7d6 30.Kc3b2 Re2xh2
+31.Rg1e1 Kd6xd5 32.Rc1d1 Kd5c4 33.Re1e7 Rf8f2 34.Re7c7 Kc4b5 35.Rd1d4 h7h5 36.Kb2b3 Rf2f3
+37.c2c3 Kb5a5 38.Rd4a4 Ka5b5 39.Ra4b4 Kb5a5 40.Rb4a4 Ka5b5 41.Ra4b4 Kb5a5 42.Rb4a4 1/2-1/2

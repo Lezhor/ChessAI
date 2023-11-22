@@ -1,10 +1,14 @@
 package program;
 
+import program.dataset_management.PlayPGN_SaveMoves;
 import program.guis.*;
 import program.guis.TerminalUI;
 import program.players.HumanPlayer;
 import program.players.Player;
 import program.players.ais.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>The Main-Class contains the Main-Method as well as other methods which start the game by creating a new Object of the game-Class with different players</p>
@@ -22,7 +26,8 @@ public class Main {
      * @param args Args
      */
     public static void main(String[] args) {
-        startTerminalGame(0, 3);
+        //runNoUiGames(8);
+        startTerminalGame(3, 3);
     }
 
     private static void startTerminalGame(int whitePlayer, int blackPlayer) {
@@ -34,10 +39,19 @@ public class Main {
     }
 
     private static void runNoUiGames(int amount) {
+        List<Integer> halfMovesCount = new ArrayList<>();
+        List<Integer> possibleMovesCount = new ArrayList<>();
         for (int i = 1; i <= amount; i++) {
             System.out.println("Running Game " + i + ":");
-            startNoGuiGame(2, 3);
+            long time = System.currentTimeMillis();
+            startNoGuiGame(3, 3);
+            time = System.currentTimeMillis() - time;
+            System.out.println("Time, the game took: " + (time / 1000f) + "\nTime per move: " + (time / 1000f / game.halfMoves));
+            halfMovesCount.add(game.halfMoves);
+            possibleMovesCount.addAll(game.possibleMoveCount);
         }
+        System.out.println("Average moves per Game:          " + calculateAvarage(halfMovesCount));
+        System.out.println("Average possible moves per Turn: " + calculateAvarage(possibleMovesCount));
     }
 
     private static void startGame(int whitePlayer, int blackPlayer, Gui gui) {
@@ -61,6 +75,14 @@ public class Main {
             case 3 -> new AI3_PosAna(playerColor);
             default -> throw new IllegalArgumentException("Playertype: " + playerType + " not defined!");
         };
+    }
+
+    private static double calculateAvarage(List<Integer> list) {
+        double average = 0;
+        for (int element : list) {
+            average += element;
+        }
+        return average / list.size();
     }
 
 }

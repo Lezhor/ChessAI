@@ -4,6 +4,8 @@ import program.guis.Gui;
 import program.players.*;
 
 import java.nio.file.FileAlreadyExistsException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Game {
 
@@ -12,6 +14,12 @@ public class Game {
      * Its length always is 64. The fields are numbered from left to right and top to down.
      */
     private int[] board;
+
+    /**
+     * Counts the amount of half-moves.
+     */
+    public int halfMoves = 0;
+    public List<Integer> possibleMoveCount = new ArrayList<>();
 
     /**
      * First Player is stored in here.
@@ -77,11 +85,17 @@ public class Game {
         while (!gameOver) {
             int move = player == ChessRules.PLAYER_WHITE ? whitePlayer.decideOnMove(board) : blackPlayer.decideOnMove(board);
             pgnWriter.addMoveToFile(board, move);
+            halfMoves++;
+            possibleMoveCount.add(ChessRules.getLegalMoves(board, player).size());
             ChessRules.makeMove(board, move);
             System.out.print("|");
             gui.printBoard(board);
             player = player ^ ChessRules.MASK_PLAYER;
             if (ChessRules.noLegalMovesLeft(board, player) || ChessRules.countPieces(board) <= 2) {
+                gameOver = true;
+            }
+
+            if (halfMoves >= 100) {
                 gameOver = true;
             }
         }

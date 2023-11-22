@@ -1,0 +1,12 @@
+[Event "?"]
+[Site "?"]
+[Date "2022.12.08"]
+[White "AI3 PiecePos-Analyzing"]
+[Black "AI3 PiecePos-Analyzing"]
+[Result "0-1"]
+
+1.e2e3 d7d5 2.Qd1h5 Qd8d6 3.Bf1b5 Bc8d7 4.Bb5xd7 Nb8xd7 5.Ng1e2 Qd6e5 6.Qh5xe5 Nd7xe5
+7.O-O Ng8f6 8.Ne2f4 g7g5 9.Nf4d3 Ne5xd3 10.c2xd3 d5d4 11.e3xd4 O-O-O 12.f2f4 g5g4
+13.h2h3 Rd8xd4 14.h3xg4 Nf6xg4 15.Rf1f3 Bf8h6 16.g2g3 Rh8g8 17.Nb1c3 c7c6 18.b2b3 Ng4f6
+19.Bc1a3 Rd4xf4 20.Rf3e3 Rf4f5 21.Re3xe7 Rg8xg3 22.Kg1h2 Bh6f4 23.Re7e8 Nf6xe8 24.Ba3e7 Rf5h5
+25.Be7h4 Rh5xh4 0-1

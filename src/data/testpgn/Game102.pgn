@@ -1,0 +1,16 @@
+[Event "?"]
+[Site "?"]
+[Date "2022.12.08"]
+[White "AI MiniMax 1"]
+[Black "AI MiniMax 1"]
+[Result "1/2-1/2"]
+
+1.a2a4 h7h5 2.f2f3 Nb8c6 3.e2e3 Rh8h7 4.Bf1c4 Nc6e5 5.Bc4d5 Ng8f6 6.Bd5b3 g7g5
+7.g2g3 Rh7h6 8.d2d4 Ne5c6 9.Ke1f1 Rh6g6 10.a4a5 Bf8h6 11.c2c3 Bh6f8 12.Ra1a3 Ra8b8
+13.Ng1e2 Rb8a8 14.Bc1d2 Ra8b8 15.h2h3 Rb8a8 16.Bd2e1 Rg6g7 17.Ne2c1 Ra8b8 18.Ra3a4 e7e6
+19.Rh1g1 Bf8d6 20.Qd1e2 Rb8a8 21.Ra4a2 Nc6e7 22.Be1d2 Ra8b8 23.Nc1d3 Rg7h7 24.Bb3c4 Ke8f8
+25.e3e4 Rh7g7 26.e4e5 b7b5 27.e5xf6 b5xc4 28.f6xg7 Kf8xg7 29.Nd3e1 Rb8b3 30.Bd2xg5 f7f6
+31.Qe2xc4 Rb3b7 32.Qc4a6 f6xg5 33.f3f4 Rb7xb2 34.Qa6c4 Rb2xb1 35.Qc4d3 Rb1c1 36.f4xg5 Bc8b7
+37.a5a6 Qd8f8 38.Ra2f2 Rc1xe1 39.Kf1xe1 Bd6xg3 40.Qd3xg3 Ne7f5 41.a6xb7 Nf5xg3 42.Rf2xf8 Kg7xf8
+43.b7b8=Q Kf8e7 44.Rg1xg3 h5h4 45.Rg3f3 d7d5 46.Qb8xc7 Ke7e8 47.Qc7f7 Ke8d8 48.Qf7xe6 Kd8c7
+49.Ke1f1 a7a6 50.Kf1e2 Kc7b8 1/2-1/2
