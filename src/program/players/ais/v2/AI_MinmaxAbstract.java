@@ -178,7 +178,8 @@ public abstract class AI_MinmaxAbstract extends Player {
     
     protected String generatePgnName(String aiName, List<Double> params) {
         return params.stream()
-                .map(String::valueOf)
+                .map(d -> String.format("%.2f", d))
+                .map(s -> s.replace(',', '.'))
                 .reduce(aiName, (a, b) -> a + "||" + b);
     }
 
