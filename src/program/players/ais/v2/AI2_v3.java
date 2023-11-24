@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.function.Function;
 
 /**
  * <p>Version 3.0 of Chess-AI</p>
@@ -25,6 +26,7 @@ public class AI2_v3 extends AI_MinmaxAbstract {
     private final double[] params;
     private final double WEIGHT_POS_PAWNS;
     private final int BIAS_PAWN_POS_PIECE_COUNT;
+    private final Function<Integer, Double> pawnRowToScore = i -> Math.exp(-0.5 * i)-0.1;
     private final double WEIGHT_POS_KNIGHTS;
     private final double WEIGHT_POS_BISHOPS;
     private final double WEIGHT_POS_ROOKS;
@@ -37,7 +39,7 @@ public class AI2_v3 extends AI_MinmaxAbstract {
      * @param player Player which this AI will play.
      */
     public AI2_v3(int player) {
-        this(player, new double[]{6, 1, 16, 1.3f, .8f, 1f, 1.1f, .4f});
+        this(player, new double[]{5, 1, 16, 1.3f, .8f, 1f, 1.1f, .4f});
     }
 
     public AI2_v3(int player, double[] params) {
@@ -61,21 +63,12 @@ public class AI2_v3 extends AI_MinmaxAbstract {
      * @return A score for the board.
      */
     public double analyzeBoard(int[] board) {
-        double score = 0;
-        score += getScoreModifier_PieceCosts(board);
-        score += getScoreModifier_PawnPos(board);
+        double score = ChessRules.getScoreByPieceCost(board);
+        score += getScoreModifier_PawnPos(board, pawnRowToScore);
         score += getScoreModifier_KnightPos(board);
         score += getScoreModifier_BishopPos(board);
         score += getScoreModifier_RookPos(board);
         score += getScoreModifier_QueenPos(board);
-        return score;
-    }
-
-    private double getScoreModifier_PieceCosts(int[] board) {
-        double score = 0;
-        for (int cell : board) {
-            score += ChessRules.getCost(cell);
-        }
         return score;
     }
 
@@ -88,25 +81,15 @@ public class AI2_v3 extends AI_MinmaxAbstract {
      * @param board An int-array which stores all the piece-information. Item 0 is in the top left corner, Item 7 in the top right, Item 63 in the bottom right.
      * @return The Score-Modifier
      */
-    private double getScoreModifier_PawnPos(int[] board) {
+    private double getScoreModifier_PawnPos(int[] board, Function<Integer, Double> rowToScore) {
         double scoreModifier = 0;
         if (ChessRules.countPieces(board) <= BIAS_PAWN_POS_PIECE_COUNT) {
             for (int i = 0; i < board.length; i++) {
                 if ((board[i] & ChessRules.MASK_SET_FIELD) > 0 && (board[i] & ChessRules.MASK_PIECE) == ChessRules.PIECE_PAWN) {
                     int player = board[i] & ChessRules.MASK_PLAYER;
                     // The scoreModifier needs to be updated here based on the Position of the pawn
-                    scoreModifier += ((player == ChessRules.PLAYER_WHITE) ? 1 : -1)
-                            * switch (player == ChessRules.PLAYER_WHITE ? ((int) Math.floor(i / 8f)) : 8 - ((int) Math.floor(i / 8f))) {
-                        case 0 -> 1;
-                        case 1 -> .4f;
-                        case 2 -> .2f;
-                        case 3 -> .1f;
-                        case 4 -> .03f;
-                        case 5 -> -.01f;
-                        case 6 -> -.03f;
-                        case 7 -> -.04f;
-                        default -> 0;
-                    };
+                    int row = player == ChessRules.PLAYER_WHITE ? ((int) Math.floor(i / 8f)) : 8 - ((int) Math.floor(i / 8f));
+                    scoreModifier += ((player == ChessRules.PLAYER_WHITE) ? 1 : -1) * rowToScore.apply(row);
                 }
             }
         }

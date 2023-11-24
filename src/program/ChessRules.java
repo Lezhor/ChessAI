@@ -1,6 +1,7 @@
 package program;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -815,6 +816,12 @@ public class ChessRules {
             case PIECE_KING -> cost = 200;
         }
         return (piece & MASK_PLAYER) == PLAYER_WHITE ? cost : -cost;
+    }
+
+    public static float getScoreByPieceCost(int[] board) {
+        return Arrays.stream(board).boxed()
+                .map(ChessRules::getCost)
+                .reduce(0f, Float::sum);
     }
 
     /**

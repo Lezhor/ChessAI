@@ -66,7 +66,7 @@ public class AI3_PosAna extends Player {
         for (int move : moves) {
             backUpBoard = board.clone();
             ChessRules.makeMove(backUpBoard, move);
-            float score = minimax(backUpBoard, (player == ChessRules.PLAYER_WHITE) ? bestScore : -1000000000, (player == ChessRules.PLAYER_WHITE) ? 1000000000 : bestScore, SEARCH_DEPTH, player ^ ChessRules.MASK_PLAYER);
+            float score = minimax(backUpBoard, (player == ChessRules.PLAYER_WHITE) ? bestScore : -1000000000, (player == ChessRules.PLAYER_WHITE) ? 1000000000 : bestScore, SEARCH_DEPTH - 1, player ^ ChessRules.MASK_PLAYER);
             if (player == ChessRules.PLAYER_WHITE) {
                 if ((board[ChessRules.getMoveOldPos(move)] & ChessRules.MASK_PIECE) == ChessRules.PIECE_KING && (board[ChessRules.getMoveOldPos(move)] & ChessRules.MASK_HAS_MOVED) == 0) {
                     score += ChessRules.isCastlingMove(board, move) ? CASTLING_BONUS : -CASTLING_BONUS;
