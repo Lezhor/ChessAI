@@ -13,7 +13,7 @@ public abstract class Player {
     /**
      * Used for storing the game in pgn.
      */
-    public final String PGN_NAME;
+    private String pgnName;
 
     /**
      * Constructor which sets the final integer 'player'
@@ -21,7 +21,7 @@ public abstract class Player {
      */
     public Player(int player, String pgnName) {
         this.player = player;
-        PGN_NAME = pgnName;
+        this.pgnName = pgnName;
     }
 
     /**
@@ -33,4 +33,11 @@ public abstract class Player {
      */
     public abstract int decideOnMove(int[] board);
 
+    public String getPgnName() {
+        return pgnName;
+    }
+
+    protected void setPgnName(String pgnName) {
+        this.pgnName = pgnName;
+    }
 }

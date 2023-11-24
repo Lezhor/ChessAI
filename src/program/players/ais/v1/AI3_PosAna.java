@@ -1,4 +1,4 @@
-package program.players.ais;
+package program.players.ais.v1;
 
 import program.ChessRules;
 import program.players.Player;
@@ -20,7 +20,7 @@ public class AI3_PosAna extends Player {
      */
 
     private final float[] params;
-    private final int SEARCH_DEPTH = 6;
+    private final int SEARCH_DEPTH = 5;
 
     private final float WEIGHT_POS_PAWNS = 1f;
     private final int BIAS_PAWN_POS_PIECE_COUNT = 16;

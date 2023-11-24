@@ -69,8 +69,8 @@ public class Game {
             e.printStackTrace();
             System.exit(1);
         }
-        pgnWriter.setWhite(whitePlayer.PGN_NAME)
-                .setBlack(blackPlayer.PGN_NAME);
+        pgnWriter.setWhite(whitePlayer.getPgnName())
+                .setBlack(blackPlayer.getPgnName());
         gui.printBoard(board);
         gameLoop();
     }
@@ -95,9 +95,11 @@ public class Game {
                 gameOver = true;
             }
 
+            /*
             if (halfMoves >= 100) {
                 gameOver = true;
             }
+             */
         }
         if (ChessRules.playerInCheck(board, player)) {
             win(player ^ ChessRules.MASK_PLAYER);

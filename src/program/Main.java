@@ -1,11 +1,11 @@
 package program;
 
-import program.dataset_management.PlayPGN_SaveMoves;
 import program.guis.*;
 import program.guis.TerminalUI;
 import program.players.HumanPlayer;
 import program.players.Player;
-import program.players.ais.*;
+import program.players.ais.v1.*;
+import program.players.ais.v2.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +27,7 @@ public class Main {
      */
     public static void main(String[] args) {
         //runNoUiGames(8);
-        startTerminalGame(3, 3);
+        startTerminalGame(3, 23);
     }
 
     private static void startTerminalGame(int whitePlayer, int blackPlayer) {
@@ -59,7 +59,7 @@ public class Main {
         try {
             player1 = getPlayer(true, whitePlayer, gui);
             player2 = getPlayer(false, blackPlayer, gui);
-            System.out.println("Starting Game: \"" + player1.PGN_NAME + "\" vs \"" + player2.PGN_NAME + "\"\n");
+            System.out.println("Starting Game: \"" + player1.getPgnName() + "\" vs \"" + player2.getPgnName() + "\"\n");
             game = new Game(player1, player2, gui);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
@@ -73,6 +73,9 @@ public class Main {
             case 1 -> new AI1_MiniMax(playerColor);
             case 2 -> new AI2_AlphaBeta(playerColor);
             case 3 -> new AI3_PosAna(playerColor);
+            case 21 -> new AI2_v1(playerColor);
+            case 22 -> new AI2_v2(playerColor);
+            case 23 -> new AI2_v3(playerColor);
             default -> throw new IllegalArgumentException("Playertype: " + playerType + " not defined!");
         };
     }

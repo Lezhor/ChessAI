@@ -15,7 +15,7 @@ public class PGNWriter {
     /**
      * Ends with a '/'.
      */
-    private final String DIRECTORY_PATH = "src/data/testpgn/";
+    private final String DIRECTORY_PATH = "src/data/pgnv2/ai2/";
 
     /**
      * Gets set to DIRECTORY_PATH + fileName specified in Constructor

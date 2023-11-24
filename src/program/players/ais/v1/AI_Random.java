@@ -1,4 +1,4 @@
-package program.players.ais;
+package program.players.ais.v1;
 
 import program.ChessRules;
 import program.players.Player;

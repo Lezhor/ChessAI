@@ -1,7 +1,7 @@
 package program.guis;
 
 import program.ChessRules;
-import program.players.ais.AI2_AlphaBeta;
+import program.players.ais.v1.AI2_AlphaBeta;
 
 import java.util.NoSuchElementException;
 import java.util.Scanner;
