@@ -55,6 +55,10 @@ public class Game {
      * @param gui         The GUI where the Board is printed to and where the Human-Input is being got from.
      */
     public Game(Player whitePlayer, Player blackPlayer, Gui gui) {
+        this(whitePlayer, blackPlayer, gui, null);
+    }
+
+    public Game(Player whitePlayer, Player blackPlayer, Gui gui, String pgnSubDirectory) {
         this.whitePlayer = whitePlayer;
         this.blackPlayer = blackPlayer;
         this.gui = gui;
@@ -64,7 +68,11 @@ public class Game {
         //initPos3();
         //initPos4();
         try {
-            pgnWriter = new PGNWriter();
+            if (pgnSubDirectory == null) {
+                pgnWriter = new PGNWriter();
+            } else {
+                pgnWriter = new PGNWriter(pgnSubDirectory);
+            }
         } catch (FileAlreadyExistsException e) {
             e.printStackTrace();
             System.exit(1);
@@ -73,6 +81,7 @@ public class Game {
                 .setBlack(blackPlayer.getPgnName());
         gui.printBoard(board, 0);
         gameLoop();
+        pgnWriter.writeDataToFile();
     }
 
     /**
@@ -107,7 +116,6 @@ public class Game {
             stalemate();
         }
         System.out.println("\n\n");
-        pgnWriter.writeDataToFile();
     }
 
 
@@ -151,16 +159,20 @@ public class Game {
     private void setPieceBlack(String cell, int pieceType) {
         setPiece(cell, pieceType, ChessRules.PLAYER_BLACK);
     }
+
     private void setPieceWhite(String cell, int pieceType) {
         setPiece(cell, pieceType, ChessRules.PLAYER_WHITE);
     }
+
     private void setPiece(String cell, int pieceType, int player) {
-        boolean hasMoved = !((pieceType & ChessRules.MASK_PIECE) == ChessRules.PIECE_PAWN && ((player == ChessRules.PLAYER_WHITE && ((int)Math.floor(getPosFromString(cell) / 8f)) == 6) || (player == ChessRules.PLAYER_BLACK && ((int)Math.floor(getPosFromString(cell) / 8f)) == 1)));
+        boolean hasMoved = !((pieceType & ChessRules.MASK_PIECE) == ChessRules.PIECE_PAWN && ((player == ChessRules.PLAYER_WHITE && ((int) Math.floor(getPosFromString(cell) / 8f)) == 6) || (player == ChessRules.PLAYER_BLACK && ((int) Math.floor(getPosFromString(cell) / 8f)) == 1)));
         setPiece(cell, pieceType, player, hasMoved);
     }
+
     private void setPiece(String cell, int pieceType, int player, boolean hasMoved) {
         setPiece(cell, pieceType, player, hasMoved, false);
     }
+
     private void setPiece(String cell, int pieceType, int player, boolean hasMoved, boolean pawnDoubleJump) {
         int piece = pieceType | player | ChessRules.MASK_SET_FIELD;
         if (hasMoved)

@@ -15,7 +15,8 @@ public class PGNWriter {
     /**
      * Ends with a '/'.
      */
-    private final String DIRECTORY_PATH = "src/data/pgnv2/ai2/";
+    private final String DIRECTORY_PATH = "src/data/";
+    private String subDirectory = "pgnv3/";
 
     /**
      * Gets set to DIRECTORY_PATH + fileName specified in Constructor
@@ -42,8 +43,12 @@ public class PGNWriter {
      * @throws FileAlreadyExistsException
      */
     public PGNWriter() throws FileAlreadyExistsException {
+        this("pgnv3/");
+    }
+    public PGNWriter(String subDirectory) throws FileAlreadyExistsException {
+        this.subDirectory = subDirectory;
         String fileName = "";
-        File directory = new File(DIRECTORY_PATH);
+        File directory = new File(getDirectoryPath());
         if (!directory.exists()) {
             directory.mkdirs();
         }
@@ -51,12 +56,12 @@ public class PGNWriter {
         do {
             i++;
             try {
-                fileName = "Game" + (Objects.requireNonNull(new File(DIRECTORY_PATH).list()).length + i) + ".pgn";
+                fileName = "Game" + (Objects.requireNonNull(new File(getDirectoryPath()).list()).length + i) + ".pgn";
             } catch (NullPointerException e) {
                 System.out.println("Directory is Empty");
                 fileName = "Game1.pgn";
             }
-            filePath = DIRECTORY_PATH + fileName;
+            filePath = getDirectoryPath() + fileName;
         } while (new File(filePath).exists());
         setDate();
     }
@@ -65,15 +70,16 @@ public class PGNWriter {
      * Initializes the Writer
      * @param fileName The Filename, without the directory-path.
      */
-    public PGNWriter(String fileName) throws FileAlreadyExistsException {
-        File directory = new File(DIRECTORY_PATH);
+    public PGNWriter(String subDirectory, String fileName) throws FileAlreadyExistsException {
+        this.subDirectory = subDirectory;
+        File directory = new File(getDirectoryPath());
         if (!directory.exists()) {
             directory.mkdirs();
         }
         if (!fileName.endsWith(".pgn")) {
             fileName = fileName + ".pgn";
         }
-        filePath = DIRECTORY_PATH + fileName;
+        filePath = getDirectoryPath() + fileName;
         if (new File(filePath).exists()) {
             throw new FileAlreadyExistsException("File '" + filePath + "' already exists!!!");
         }
@@ -273,6 +279,10 @@ public class PGNWriter {
             ret = ret | ChessRules.PLAYER_WHITE;
         }
         return ret | ChessRules.MASK_SET_FIELD | ChessRules.MASK_HAS_MOVED;
+    }
+
+    private String getDirectoryPath() {
+        return DIRECTORY_PATH + subDirectory;
     }
 
 }
