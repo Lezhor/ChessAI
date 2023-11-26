@@ -172,7 +172,7 @@ public class PGNWriter {
      * @param move The move-integer. ChessRules.getMoveOldPos(move) and ChessRules.getMoveNewPos(move) can be used on it.
      * @return SAN-Notation of move.
      */
-    private String getSAN(int[] board, int move) {
+    public static String getSAN(int[] board, int move) {
         String san = "";
         int oldPos = ChessRules.getMoveOldPos(move);
         int newPos = ChessRules.getMoveNewPos(move);
@@ -201,7 +201,7 @@ public class PGNWriter {
      * @param piece The Piece specified in ChessRules.MASK_PIECE
      * @return The SAN-Letter
      */
-    private String getPieceLetter(int piece) {
+    private static String getPieceLetter(int piece) {
         return switch (piece & ChessRules.MASK_PIECE) {
             default -> "";
             case ChessRules.PIECE_KNIGHT -> "N";
@@ -212,7 +212,7 @@ public class PGNWriter {
         };
     }
 
-    private String posToString(int pos) {
+    private static String posToString(int pos) {
         if (pos < 0) {
             throw new IndexOutOfBoundsException("Position negative");
         } else if (pos > 63) {

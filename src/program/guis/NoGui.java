@@ -8,7 +8,7 @@ public class NoGui extends Gui{
     }
 
     @Override
-    public void printBoard(int[] board) {
+    public void printBoard(int[] board, int lastMove) {
     }
 
     @Override

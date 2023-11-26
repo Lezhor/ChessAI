@@ -1,6 +1,7 @@
 package program.guis;
 
 import program.ChessRules;
+import program.PGNWriter;
 import program.players.ais.v1.AI2_AlphaBeta;
 
 import java.util.NoSuchElementException;
@@ -20,7 +21,7 @@ public class TerminalUI extends Gui {
      * @param board Board-Array
      */
     @Override
-    public void printBoard(int[] board) {
+    public void printBoard(int[] board, int lastMove) {
         for (int i = 0; i < board.length; i++) {
             if (i % 8 == 0) {
                 System.out.print("\n   ");
@@ -55,11 +56,9 @@ public class TerminalUI extends Gui {
             System.out.println("\n           " + "H" + s + "G" + s + "F" + s + "E" + s + "D" + s + "C" + s + "B" + s + "A");
         }
 
-        float score = 0f;
-        for (int cell : board) {
-            score += AI2_AlphaBeta.analyzeBoard(board);
-        }
-        System.out.println("\nScore: " + score);
+        float score = ChessRules.getScoreByPieceCost(board);
+        System.out.println("\nMove: " + PGNWriter.getSAN(board, lastMove));
+        System.out.println("Score: " + score);
     }
 
     /**

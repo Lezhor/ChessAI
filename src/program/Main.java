@@ -27,12 +27,24 @@ public class Main {
      */
     public static void main(String[] args) {
         //runNoUiGames(8);
-        startTerminalGame(3, 23);
+        startTerminalGame(AI2_v3::new, AI2_v3::new);
     }
 
     private static void startTerminalGame(int whitePlayer, int blackPlayer) {
         startGame(whitePlayer, blackPlayer, new TerminalUI(blackPlayer == 0 && whitePlayer != 0 ? ChessRules.PLAYER_BLACK : ChessRules.PLAYER_WHITE));
     }
+
+    private static void startTerminalGame(PlayerConstructor<? extends Player> white, PlayerConstructor<? extends Player> black) {
+        Player whitePlayer = white.create(ChessRules.PLAYER_WHITE);
+        Player blackPlayer = black.create(ChessRules.PLAYER_BLACK);
+        game = new Game(whitePlayer, blackPlayer, new TerminalUI((blackPlayer instanceof HumanPlayer) && !(whitePlayer instanceof HumanPlayer) ? ChessRules.PLAYER_BLACK : ChessRules.PLAYER_WHITE));
+    }
+
+    @FunctionalInterface
+    private interface PlayerConstructor<T extends Player> {
+        T create(int player);
+    }
+
 
     private static void startNoGuiGame(int whitePlayer, int blackPlayer) {
         startGame(whitePlayer, blackPlayer, new NoGui());

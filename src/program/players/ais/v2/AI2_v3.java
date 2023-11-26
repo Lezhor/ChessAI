@@ -39,7 +39,7 @@ public class AI2_v3 extends AI_MinmaxAbstract {
      * @param player Player which this AI will play.
      */
     public AI2_v3(int player) {
-        this(player, new double[]{5, 1, 16, 1.3f, .8f, 1f, 1.1f, .4f});
+        this(player, new double[]{6, 1, 16, 1.3f, .8f, 1f, 1.1f, .4f});
     }
 
     public AI2_v3(int player, double[] params) {

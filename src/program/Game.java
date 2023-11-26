@@ -71,7 +71,7 @@ public class Game {
         }
         pgnWriter.setWhite(whitePlayer.getPgnName())
                 .setBlack(blackPlayer.getPgnName());
-        gui.printBoard(board);
+        gui.printBoard(board, 0);
         gameLoop();
     }
 
@@ -89,7 +89,7 @@ public class Game {
             possibleMoveCount.add(ChessRules.getLegalMoves(board, player).size());
             ChessRules.makeMove(board, move);
             System.out.print("|");
-            gui.printBoard(board);
+            gui.printBoard(board, move);
             player = player ^ ChessRules.MASK_PLAYER;
             if (ChessRules.noLegalMovesLeft(board, player) || ChessRules.countPieces(board) <= 2) {
                 gameOver = true;

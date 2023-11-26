@@ -15,7 +15,7 @@ public abstract class Gui {
      * Draws the board. For example on the terminal.
      * @param board Board-Array
      */
-    public abstract void printBoard(int[] board);
+    public abstract void printBoard(int[] board, int lastMove);
 
     /**
      * Prints a Win-Screen.
