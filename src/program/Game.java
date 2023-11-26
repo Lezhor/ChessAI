@@ -104,11 +104,10 @@ public class Game {
                 gameOver = true;
             }
 
-            /*
-            if (halfMoves >= 100) {
-                gameOver = true;
+            if (halfMoves >= 300) {
+                throw new IllegalStateException("Too long game");
             }
-             */
+
         }
         if (ChessRules.playerInCheck(board, player)) {
             win(player ^ ChessRules.MASK_PLAYER);

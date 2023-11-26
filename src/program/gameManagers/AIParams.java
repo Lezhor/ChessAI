@@ -3,6 +3,7 @@ package program.gameManagers;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 public class AIParams {
 
@@ -17,15 +18,15 @@ public class AIParams {
         resetParams();
     }
 
-    public double[] getNextParams() {
+    public double[] getParams() {
+        Random r = new Random();
+        return Arrays.stream(params).mapToDouble(ParamRange::getValue).map(d -> d * ( .975 + (r.nextDouble() / 20))).toArray();
+    }
+
+    public void iterateParams() {
         if (doneIterating()) {
             throw new IllegalStateException("Done iterating...");
         }
-        iterateParams();
-        return Arrays.stream(params).mapToDouble(ParamRange::getValue).toArray();
-    }
-
-    private void iterateParams() {
         for (ParamRange param : params) {
             if (param.isIterating()) {
                 if (param.reachedEnd()) {
@@ -41,7 +42,7 @@ public class AIParams {
 
     public boolean doneIterating() {
         for (ParamRange param : params) {
-            if (param.isIterating() && !param.reachedEnd()) {
+            if (param.isIterating() && param.reachedEnd()) {
                 return true;
             }
         }
@@ -52,12 +53,20 @@ public class AIParams {
         Arrays.stream(params).forEach(ParamRange::resetValue);
     }
 
+    @Override
+    public String toString() {
+        return Arrays.stream(params).map(Object::toString).reduce("AIParams{ ", (a, b) -> a + b + "; ") + "}";
+    }
+
     public static class Builder {
 
         private final List<ParamRange> params;
 
-        public Builder() {
+        public Builder(double... values) {
             params = new LinkedList<>();
+            for (double v : values) {
+                addParam(v);
+            }
         }
 
         public Builder addParam(ParamRange param) {
@@ -66,12 +75,17 @@ public class AIParams {
         }
 
         public Builder addParam(double defaultValue) {
-            params.add(new ParamRange(defaultValue, 1));
+            params.add(new ParamRange(defaultValue));
             return this;
         }
 
-        public Builder addIteratingParam(double defaultValue, double spread, int divisions) {
-            params.add(new ParamRange(defaultValue, spread, divisions));
+        public Builder addIteratingParam(double defaultValue, double min, double max, int divisions) {
+            params.add(new ParamRange(defaultValue, min, max, divisions));
+            return this;
+        }
+
+        public Builder enableIteratingOnParam(int paramIndex, double min, double max, int divisions) {
+            params.get(paramIndex).enableIterating(divisions, min, max);
             return this;
         }
 

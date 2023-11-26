@@ -1,5 +1,6 @@
 package program;
 
+import program.gameManagers.AnalyzeAI3ParamsWithGames;
 import program.guis.*;
 import program.guis.TerminalUI;
 import program.players.HumanPlayer;
@@ -27,7 +28,9 @@ public class Main {
      */
     public static void main(String[] args) {
         //runNoUiGames(8);
-        startTerminalGame(AI2_v3::new, AI2_v3::new);
+        //startTerminalGame(AI2_v3::new, AI2_v3::new);
+        //AnalyzeAI3ParamsWithGames.analyzeAIv3_WeightPosPawns();
+        //AnalyzeAI3ParamsWithGames.analyzeWeightPosKnights();
     }
 
     private static void startTerminalGame(int whitePlayer, int blackPlayer) {

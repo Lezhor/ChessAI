@@ -108,7 +108,8 @@ public class PGNWriter {
             writer.write(fileBody + (result.equalsIgnoreCase("?") ? "" : " " + result));
             writer.close();
         } catch (IOException e) {
-            System.out.println("PGN-File-Init failed with Filepath: \"" + filePath + "\"");
+            System.err.println("PGN-File-Init failed with Filepath: \"" + filePath + "\"");
+            e.printStackTrace();
         }
     }
 
@@ -169,7 +170,7 @@ public class PGNWriter {
         String san = getSAN(board, move);
         fileBody += san;
         moveCounter++;
-        writeDataToFile();
+        //writeDataToFile();
     }
 
     /**

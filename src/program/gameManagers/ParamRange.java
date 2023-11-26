@@ -9,19 +9,19 @@ public class ParamRange {
     private int currentDivision;
     private boolean iterating;
 
-    public ParamRange(double defaultValue, double spread) {
-        this(defaultValue, spread, 0);
+    public ParamRange(double defaultValue) {
+        this(defaultValue, defaultValue, defaultValue, 0);
     }
 
-    public ParamRange(double defaultValue, double spread, int divisions) {
+    public ParamRange(double defaultValue, double min, double max, int divisions) {
         this.defaultValue = defaultValue;
-        min = defaultValue - spread;
-        max = defaultValue + spread;
+        this.min = min;
+        this.max = max;
         this.currentValue = defaultValue;
         if (divisions == 0) {
             disableIterating();
         } else {
-            enableIterating(divisions);
+            enableIterating(divisions, min, max);
         }
     }
 
@@ -52,26 +52,31 @@ public class ParamRange {
         return currentValue;
     }
 
-    public ParamRange enableIterating(int divisions) {
-        if (!iterating) {
-            this.divisions = divisions;
-            iterating = true;
-            resetValue();
-        }
-        return this;
+    public void enableIterating(int divisions, double min, double max) {
+        this.divisions = divisions;
+        this.min = min;
+        this.max = max;
+        iterating = true;
+        resetValue();
     }
 
-    public ParamRange disableIterating() {
-        if (iterating) {
-            divisions = 0;
-            currentDivision = 0;
-            currentValue = defaultValue;
-            iterating = false;
-        }
-        return this;
+    public void disableIterating() {
+        divisions = 0;
+        currentDivision = 0;
+        currentValue = defaultValue;
+        iterating = false;
     }
 
     public boolean isIterating() {
         return iterating;
+    }
+
+    @Override
+    public String toString() {
+        if (iterating) {
+            return String.format("%.2f", min) + ".." + String.format("%.2f", max);
+        } else {
+            return String.format("%.2f", currentValue);
+        }
     }
 }
