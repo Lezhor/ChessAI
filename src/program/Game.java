@@ -97,7 +97,7 @@ public class Game {
             halfMoves++;
             possibleMoveCount.add(ChessRules.getLegalMoves(board, player).size());
             ChessRules.makeMove(board, move);
-            System.out.print("|");
+            //System.out.print("|");
             gui.printBoard(board, move);
             player = player ^ ChessRules.MASK_PLAYER;
             if (ChessRules.noLegalMovesLeft(board, player) || ChessRules.countPieces(board) <= 2) {
@@ -115,7 +115,7 @@ public class Game {
         } else {
             stalemate();
         }
-        System.out.println("\n\n");
+        //System.out.println("\n\n");
     }
 
 
