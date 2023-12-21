@@ -29,22 +29,28 @@ public class Main {
     public static void main(String[] args) {
         //runNoUiGames(8);
         //startTerminalGame(AI2_v3::new, AI2_v3::new);
-        //AnalyzeAI3ParamsWithGames.analyzeAIv3_WeightPosPawns();
-        //AnalyzeAI3ParamsWithGames.analyzeWeightPosKnights();
+        switch (2) {
+            case 0 -> AnalyzeAI3ParamsWithGames.analyzeWeightPosKnights(); // did
+            case 1 -> AnalyzeAI3ParamsWithGames.analyzeWeightPosBishop(); // did
+            case 2 -> AnalyzeAI3ParamsWithGames.analyzeWeightPosRook();
+            case 3 -> AnalyzeAI3ParamsWithGames.analyzeWeightQueenRook();
+            case 4 -> AnalyzeAI3ParamsWithGames.analyzeWeightCastlingBonus();
+        }
+
     }
 
     private static void startTerminalGame(int whitePlayer, int blackPlayer) {
         startGame(whitePlayer, blackPlayer, new TerminalUI(blackPlayer == 0 && whitePlayer != 0 ? ChessRules.PLAYER_BLACK : ChessRules.PLAYER_WHITE));
     }
 
-    private static void startTerminalGame(PlayerConstructor<? extends Player> white, PlayerConstructor<? extends Player> black) {
+    private static void startTerminalGame(PlayerFactory<? extends Player> white, PlayerFactory<? extends Player> black) {
         Player whitePlayer = white.create(ChessRules.PLAYER_WHITE);
         Player blackPlayer = black.create(ChessRules.PLAYER_BLACK);
         game = new Game(whitePlayer, blackPlayer, new TerminalUI((blackPlayer instanceof HumanPlayer) && !(whitePlayer instanceof HumanPlayer) ? ChessRules.PLAYER_BLACK : ChessRules.PLAYER_WHITE));
     }
 
     @FunctionalInterface
-    private interface PlayerConstructor<T extends Player> {
+    private interface PlayerFactory<T extends Player> {
         T create(int player);
     }
 

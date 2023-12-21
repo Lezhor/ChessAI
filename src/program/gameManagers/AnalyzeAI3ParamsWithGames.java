@@ -33,6 +33,34 @@ public class AnalyzeAI3ParamsWithGames {
         playGamesAIv3("ai3/knightPos/", DEFAULT_PARAMETERS, iteratingParams, 30, 0);
     }
 
+    public static void analyzeWeightPosBishop() {
+        AIParams iteratingParams = new AIParams.Builder(DEFAULT_PARAMETERS)
+                .enableIteratingOnParam(4, 0.2, 2.2, 9)
+                .build();
+        playGamesAIv3("ai3/bishopPos/", DEFAULT_PARAMETERS, iteratingParams, 50, 0);
+    }
+
+    public static void analyzeWeightPosRook() {
+        AIParams iteratingParams = new AIParams.Builder(DEFAULT_PARAMETERS)
+                .enableIteratingOnParam(5, 0.2, 2.2, 10)
+                .build();
+        playGamesAIv3("ai3/rookPos/", DEFAULT_PARAMETERS, iteratingParams, 50, 0);
+    }
+
+    public static void analyzeWeightQueenRook() {
+        AIParams iteratingParams = new AIParams.Builder(DEFAULT_PARAMETERS)
+                .enableIteratingOnParam(6, 0.2, 2.2, 10)
+                .build();
+        playGamesAIv3("ai3/queenPos/", DEFAULT_PARAMETERS, iteratingParams, 50, 0);
+    }
+
+    public static void analyzeWeightCastlingBonus() {
+        AIParams iteratingParams = new AIParams.Builder(DEFAULT_PARAMETERS)
+                .enableIteratingOnParam(7, 0, 1.4, 7)
+                .build();
+        playGamesAIv3("ai3/castlingBonus/", DEFAULT_PARAMETERS, iteratingParams, 50, 0);
+    }
+
     private static void playGamesAIv3(String directory, double[] defaultParams, AIParams iteratingParams, int samplesPerIteration) {
         playGamesAIv3(directory, defaultParams, iteratingParams, samplesPerIteration, 0);
     }
@@ -51,10 +79,10 @@ public class AnalyzeAI3ParamsWithGames {
                 try {
                     double[] otherParams = iteratingParams.getParams();
                     //System.out.println(otherParams[3]);
-                    new Game(new AI2_v3(ChessRules.PLAYER_WHITE, defaultParams), new AI2_v3(ChessRules.PLAYER_BLACK, otherParams), new NoGui(), directory + directoryCount + "/");
+                    new Game(new AI2_v3(ChessRules.PLAYER_WHITE, defaultParams), new AI2_v3(ChessRules.PLAYER_BLACK, otherParams), new NoGui(), directory + directoryCount + "/iterBlack/");
                     System.out.print("|");
                     i++;
-                    new Game(new AI2_v3(ChessRules.PLAYER_WHITE, otherParams), new AI2_v3(ChessRules.PLAYER_BLACK, defaultParams), new NoGui(), directory + directoryCount + "/");
+                    new Game(new AI2_v3(ChessRules.PLAYER_WHITE, otherParams), new AI2_v3(ChessRules.PLAYER_BLACK, defaultParams), new NoGui(), directory + directoryCount + "/iterWhite/");
                     System.out.print("|");
                 } catch (IllegalStateException e) {
                     System.out.print("_");
