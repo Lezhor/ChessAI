@@ -8,6 +8,7 @@ import java.util.Random;
 public class AIParams {
 
     private final ParamRange[] params;
+    private boolean noIterParams_DoneIterating = false;
 
     private AIParams() {
         params = new ParamRange[0];
@@ -27,8 +28,10 @@ public class AIParams {
         if (doneIterating()) {
             throw new IllegalStateException("Done iterating...");
         }
+        boolean noneIterating = true;
         for (ParamRange param : params) {
             if (param.isIterating()) {
+                noneIterating = false;
                 if (param.reachedEnd()) {
                     param.resetValue();
                 } else {
@@ -37,14 +40,23 @@ public class AIParams {
                 }
             }
         }
-
+        if (noneIterating) {
+            noIterParams_DoneIterating = true;
+        }
     }
 
     public boolean doneIterating() {
+        boolean noneIterating = true;
         for (ParamRange param : params) {
-            if (param.isIterating() && param.reachedEnd()) {
-                return true;
+            if (param.isIterating()) {
+                noneIterating = false;
+                if (param.reachedEnd()) {
+                    return true;
+                }
             }
+        }
+        if (noneIterating) {
+            return noIterParams_DoneIterating;
         }
         return false;
     }
