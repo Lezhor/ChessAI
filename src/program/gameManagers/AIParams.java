@@ -62,6 +62,7 @@ public class AIParams {
     }
 
     public void resetParams() {
+        noIterParams_DoneIterating = false;
         Arrays.stream(params).forEach(ParamRange::resetValue);
     }
 
