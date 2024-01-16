@@ -92,39 +92,40 @@ public class AnalyzeAI3ParamsWithGames {
             System.out.println("Skipping one param set...");
         }
         int directoryCount = 1 + skip;
-        ExecutorService service = Executors.newFixedThreadPool(10);
-        do {
-            System.out.print("Changed Params: ");
-            for (int i = 0; i < samplesPerIteration; i++) {
-                double[] otherParams = iteratingParams.getParams();
+        try (ExecutorService service = Executors.newFixedThreadPool(10)) {
+            do {
+                System.out.print("Changed Params: ");
+                for (int i = 0; i < samplesPerIteration; i++) {
+                    double[] otherParams = iteratingParams.getParams();
 
-                final int dirCount1 = directoryCount;
-                final int i1 = i + 1;
-                service.submit(() -> {
-                    try {
-                        new Game(new AI2_v3(ChessRules.PLAYER_WHITE, defaultParams), new AI2_v3(ChessRules.PLAYER_BLACK, otherParams), new NoGui(), directory + dirCount1 + "/iterBlack/", "Game" + i1 + ".pgn");
-                        System.out.print("|");
-                    } catch (IllegalStateException e) {
-                        System.out.print("_");
-                    }
-                });
+                    final int dirCount1 = directoryCount;
+                    final int i1 = i + 1;
+                    service.submit(() -> {
+                        try {
+                            new Game(new AI2_v3(ChessRules.PLAYER_WHITE, defaultParams), new AI2_v3(ChessRules.PLAYER_BLACK, otherParams), new NoGui(), directory + dirCount1 + "/iterBlack/", "Game" + i1 + ".pgn");
+                            System.out.print("|");
+                        } catch (IllegalStateException e) {
+                            System.out.print("_");
+                        }
+                    });
 
-                final int dirCount2 = directoryCount;
-                final int i2 = i + 1;
-                service.submit(() -> {
-                    try {
-                        new Game(new AI2_v3(ChessRules.PLAYER_WHITE, otherParams), new AI2_v3(ChessRules.PLAYER_BLACK, defaultParams), new NoGui(), directory + dirCount2 + "/iterWhite/", "Game" + i2 + ".pgn");
-                        System.out.print("|");
-                    } catch (IllegalStateException e) {
-                        System.out.print("_");
-                    }
-                });
-            }
-            iteratingParams.iterateParams();
-            System.out.println();
-            directoryCount++;
+                    final int dirCount2 = directoryCount;
+                    final int i2 = i + 1;
+                    service.submit(() -> {
+                        try {
+                            new Game(new AI2_v3(ChessRules.PLAYER_WHITE, otherParams), new AI2_v3(ChessRules.PLAYER_BLACK, defaultParams), new NoGui(), directory + dirCount2 + "/iterWhite/", "Game" + i2 + ".pgn");
+                            System.out.print("|");
+                        } catch (IllegalStateException e) {
+                            System.out.print("_");
+                        }
+                    });
+                }
+                iteratingParams.iterateParams();
+                System.out.println();
+                directoryCount++;
 
-        } while (!iteratingParams.doneIterating());
+            } while (!iteratingParams.doneIterating());
+        }
         System.out.println("\n----------------------------------------\n");
     }
 
