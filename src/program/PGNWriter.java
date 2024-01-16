@@ -45,25 +45,32 @@ public class PGNWriter {
     public PGNWriter() throws FileAlreadyExistsException {
         this("pgnv3/");
     }
-    public PGNWriter(String subDirectory) throws FileAlreadyExistsException {
-        this.subDirectory = subDirectory;
-        String fileName = "";
-        File directory = new File(getDirectoryPath());
-        if (!directory.exists()) {
-            directory.mkdirs();
-        }
-        int i = 0;
-        do {
-            i++;
-            try {
-                fileName = "Game" + (Objects.requireNonNull(new File(getDirectoryPath()).list()).length + i) + ".pgn";
-            } catch (NullPointerException e) {
-                System.out.println("Directory is Empty");
-                fileName = "Game1.pgn";
+    public PGNWriter(String subDirectory) {
+        synchronized (PGNWriter.class) {
+            this.subDirectory = subDirectory;
+            String fileName = "";
+            File directory = new File(getDirectoryPath());
+            if (!directory.exists()) {
+                directory.mkdirs();
             }
-            filePath = getDirectoryPath() + fileName;
-        } while (new File(filePath).exists());
-        setDate();
+            int i = 0;
+            do {
+                i++;
+                try {
+                    fileName = "Game" + (Objects.requireNonNull(new File(getDirectoryPath()).list()).length + i) + ".pgn";
+                } catch (NullPointerException e) {
+                    System.out.println("Directory is Empty");
+                    fileName = "Game1.pgn";
+                }
+                filePath = getDirectoryPath() + fileName;
+            } while (new File(filePath).exists());
+            File file = new File(filePath);
+            try {
+                file.createNewFile();
+            } catch (IOException ignored) {
+            }
+            setDate();
+        }
     }
 
     /**
