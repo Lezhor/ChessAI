@@ -1,0 +1,16 @@
+[Event "?"]
+[Site "?"]
+[Date "2023.11.24"]
+[White "AI3 PiecePos-Analyzing||5.00||1.00||16.00||1.30||0.80||1.00||1.10||0.40"]
+[Black "chess.io (1400)"]
+[Result "1-0"]
+
+1.e2e3 c7c5 2.Qd1h5 e7e6 3.Bf1d3 Qd8c7 4.Nb1c3 c5c4 5.Bd3f1 Ng8f6 6.Qh5f3 Nb8c6
+7.Nc3b5 Qc7b6 8.Nb5d4 Ra8b8 9.Nd4xc6 b7xc6 10.Qf3f4 h7h5 11.a2a4 c4c3 12.d2xc3 Bc8a6
+13.a4a5 Qb6b7 14.Bf1xa6 Qb7a8 15.Qf4c7 Nf6d5 16.Qc7g3 Rh8g8 17.e3e4 Nd5f6 18.Qg3c7 Bf8c5
+19.f2f3 d7d5 20.Ng1h3 Rg8f8 21.Ke1e2 d5xe4 22.f3xe4 Nf6xe4 23.Qc7e5 g7g5 24.Qe5xe4 Bc5e7
+25.Rh1d1 g5g4 26.Nh3f2 Rb8d8 27.Bc1f4 Rd8d5 28.Rd1xd5 e6xd5 29.Qe4e5 f7f6 30.Qe5e6 Ke8d8
+31.Bf4d6 Rf8e8 32.Ke2d2 g4g3 33.Ba6c8 Qa8xc8 34.Bd6xe7 Re8xe7 35.Qe6xf6 g3xf2 36.Qf6f8 Re7e8
+37.Qf8f6 Re8e7 38.Qf6f8 Kd8d7 39.Qf8xf2 Qc8h8 40.Qf2xa7 Kd7d6 41.Qa7b6 Re7e4 42.b2b4 Re4e8
+43.b4b5 Qh8h7 44.Qb6xc6 Kd6e5 45.Ra1e1 Ke5f5 46.Re1xe8 Qh7f7 47.c3c4 d5xc4 48.b5b6 Kf5g4
+49.b6b7 Qf7f4 50.Kd2c3 Qf4xh2 51.Qc6g6 Kg4h4 52.Qg6f6 Kh4g4 53.Re8g8 1-0

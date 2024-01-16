@@ -1,0 +1,23 @@
+[Event "?"]
+[Site "?"]
+[Date "2022.11.17"]
+[White "chess.com (1300 ELO)"]
+[Black "AI MiniMax 1"]
+[Result "1-0"]
+
+1.e2e4 Nb8c6 2.Qd1h5 e7e6 3.Ng1f3 a7a6 4.d2d4 Qd8f6 5.c2c3 g7g6 6.Qh5g5 Ke8e7
+7.Qg5e3 Bf8h6 8.Nf3g5 Ra8b8 9.e4e5 Qf6f5 10.Nb1a3 Rb8a8 11.f2f3 Ra8b8 12.Bf1d3 Bh6xg5
+13.Qe3xg5 Qf5xg5 14.Bc1xg5 Ke7e8 15.Ke1f2 d7d5 16.Ra1f1 Ke8d7 17.Na3c2 h7h6 18.Bg5d2 a6a5
+19.Bd3b5 Rb8a8 20.Rf1b1 Kd7e7 21.h2h4 Nc6d8 22.g2g4 Ra8b8 23.Rb1e1 Rb8a8 24.Bb5d3 Bc8d7
+25.h4h5 g6xh5 26.g4xh5 Ra8b8 27.Re1g1 Nd8c6 28.Rg1g7 Rb8c8 29.Bd3b5 Rc8b8 30.a2a3 Nc6xe5
+31.Bb5e2 Ke7f6 32.Rg7g1 Ne5c6 33.Nc2e3 Rb8d8 34.b2b3 b7b6 35.Be2b5 Bd7e8 36.Rg1g3 Rd8b8
+37.Rh1g1 Be8d7 38.Bb5d3 Kf6e7 39.Rg3g7 Ng8f6 40.Bd3b5 Nf6xh5 41.Rg7g4 f7f5 42.Rg4g6 Nc6xd4
+43.c3xd4 Bd7xb5 44.a3a4 Bb5e8 45.Rg6g8 Be8d7 46.Rg8g6 Rb8c8 47.Ne3c2 f5f4 48.Rg1c1 Rc8f8
+49.Rc1e1 Rf8g8 50.Re1g1 Rg8b8 51.Rg1g4 e6e5 52.d4xe5 c7c5 53.Rg4h4 Bd7e8 54.Rg6d6 d5d4
+55.Nc2e1 Rb8b7 56.Rh4h3 Be8f7 57.Ne1d3 Bf7e8 58.Bd2xf4 Nh5xf4 59.Nd3xf4 Rh8f8 60.Nf4d5 Ke7f7
+61.Kf2e2 Be8d7 62.Rh3h4 Rf8h8 63.f3f4 Bd7e6 64.Ke2f3 Be6d7 65.Kf3e2 Bd7e6 66.Ke2f3 Rh8e8
+67.Kf3e4 Re8h8 68.f4f5 Be6c8 69.e5e6 Kf7g8 70.Rd6c6 Kg8h7 71.Rh4h2 Rb7a7 72.e6e7 Kh7g7
+73.Ke4f4 Bc8b7 74.Rc6d6 Bb7xd5 75.f5f6 Kg7f7 76.Rd6xd5 d4d3 77.Rd5d6 Ra7b7 78.Kf4e3 Rh8g8
+79.Ke3d2 h6h5 80.Rd6d8 Rg8e8 81.Rh2f2 b6b5 82.Rf2f5 b5xa4 83.b3xa4 Rb7b2 84.Kd2xd3 c5c4
+85.Kd3c3 Rb2b1 86.Kc3c2 Rb1e1 87.Kc2c3 Re1e4 88.Rd8xe8 Re4e3 89.Kc3xc4 Re3e4 90.Kc4d5 Re4e1
+91.Re8f8 Kf7g6 92.Rf5e5 Re1d1 93.Kd5e6 Rd1d6 94.Ke6xd6 Kg6h7 95.Re5xh5 Kh7g6 96.e7e8=Q 1-0

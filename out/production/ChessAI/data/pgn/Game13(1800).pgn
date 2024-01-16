@@ -1,0 +1,19 @@
+[Event "?"]
+[Site "?"]
+[Date "2022.11.22"]
+[White "chess.com (1800)"]
+[Black "AI3 PiecePos-Analyzing"]
+[Result "0-1"]
+
+1.e2e4 d7d5 2.e4xd5 Qd8xd5 3.Nb1c3 Qd5e6 4.Bf1e2 Bc8d7 5.d2d4 Qe6g6 6.Nc3d5 Qg6d6
+7.c2c4 Nb8a6 8.Qd1b3 Bd7c6 9.Bc1f4 Qd6g6 10.Qb3h3 Qg6e4 11.Qh3f3 Qe4xd4 12.Ra1d1 Qd4xb2
+13.Qf3e3 e7e6 14.Be2h5 Bc6xd5 15.Rd1xd5 Qb2b4 16.Rd5d2 Qb4xc4 17.Bh5e2 Qc4c1 18.Be2d1 Bf8b4
+19.Qe3d4 Qc1c6 20.Qd4xg7 Bb4c3 21.Qg7g3 Ng8f6 22.Ng1e2 Nf6e4 23.Qg3f3 Bc3xd2 24.Bf4xd2 Ne4xd2
+25.Qf3xc6 b7xc6 26.Ke1xd2 O-O-O 27.Kd2e3 Rh8g8 28.Bd1c2 h7h6 29.Bc2e4 Na6b4 30.Rh1c1 f7f5
+31.Be4xc6 Rd8d3 32.Ke3f4 Nb4xc6 33.Rc1xc6 Rg8xg2 34.Kf4e5 Rg2xf2 35.Ne2d4 Kc8d7 36.Rc6a6 Rd3e3
+37.Ke5f6 e6e5 38.Nd4c6 e5e4 39.h2h4 Re3h3 40.Nc6e5 Kd7c8 41.Ra6xa7 Rh3xh4 42.Ne5g6 Rh4h1
+43.Ng6e7 Kc8b8 44.Ne7c6 Kb8c8 45.Kf6e5 Rh1c1 46.Nc6d4 Rc1c5 47.Ke5f6 f5f4 48.Ra7a8 Kc8b7
+49.Ra8h8 Rf2xa2 50.Nd4e6 Rc5d5 51.Ne6xf4 Ra2f2 52.Kf6e6 Rd5a5 53.Nf4d5 e4e3 54.Nd5xe3 Rf2e2
+55.Ke6f7 Re2xe3 56.Rh8xh6 Ra5d5 57.Rh6e6 Re3xe6 58.Kf7xe6 Rd5d3 59.Ke6e5 Rd3d1 60.Ke5f5 c7c5
+61.Kf5f4 c5c4 62.Kf4e4 c4c3 63.Ke4f5 c3c2 64.Kf5g5 Kb7a6 65.Kg5f4 c2c1=Q 66.Kf4f5 Qc1a1
+67.Kf5g6 Rd1f1 68.Kg6h6 Rf1g1 69.Kh6h5 Qa1h8 0-1

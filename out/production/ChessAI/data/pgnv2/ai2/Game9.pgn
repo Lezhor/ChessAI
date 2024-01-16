@@ -1,0 +1,19 @@
+[Event "?"]
+[Site "?"]
+[Date "2023.11.24"]
+[White "AI3 PiecePos-Analyzing||6.00||1.00||16.00||1.30||0.80||1.00||1.10||0.40"]
+[Black "chess.com (1500)"]
+[Result "1-0"]
+
+1.e2e3 g7g6 2.Qd1g4 Ng8f6 3.Qg4d4 Rh8g8 4.Nb1c3 Nb8c6 5.Qd4h4 g6g5 6.Qh4a4 d7d5
+7.Ng1f3 Bc8d7 8.Nf3d4 Bf8g7 9.Qa4a3 e7e5 10.Nd4xc6 Bd7xc6 11.Bf1b5 Ke8d7 12.Qa3b3 Bc6xb5
+13.Qb3xb5 Kd7c8 14.f2f3 d5d4 15.Nc3e2 Qd8d5 16.Qb5xd5 Nf6xd5 17.h2h4 d4xe3 18.h4xg5 f7f6
+19.Rh1xh7 c7c6 20.g5g6 e3xd2 21.Bc1xd2 Bg7f8 22.Rh7f7 Kc8b8 23.c2c4 Nd5b6 24.Ra1c1 f6f5
+25.c4c5 Nb6d5 26.Rf7xf5 Bf8e7 27.Rf5xe5 Be7f6 28.Re5e4 Bf6xb2 29.Rc1b1 Bb2a3 30.Re4c4 Kb8c7
+31.Ne2f4 Ra8d8 32.Bd2a5 b7b6 33.Nf4e6 Kc7b8 34.Ne6xd8 Rg8xd8 35.c5xb6 a7xb6 36.Rb1b3 Rd8g8
+37.Rc4xc6 Kb8b7 38.Rc6e6 Ba3c5 39.g2g4 Rg8a8 40.Ba5d2 Nd5c7 41.Re6e5 Bc5d4 42.Re5e4 Bd4f6
+43.g4g5 Bf6h8 44.Re4e7 Ra8g8 45.Bd2f4 Rg8xg6 46.Re7xc7 Kb7a6 47.Rb3a3 Ka6b5 48.Ra3a8 Bh8d4
+49.Rc7c2 Rg6e6 50.Ke1f1 Bd4c5 51.Rc2e2 Re6g6 52.Re2b2 Kb5c4 53.a2a4 Kc4c3 54.Bf4e5 Bc5d4
+55.Be5xd4 Kc3xd4 56.f3f4 Kd4e4 57.Ra8f8 Rg6c6 58.f4f5 Ke4f4 59.g5g6 Rc6c7 60.Rb2xb6 Rc7c4
+61.g6g7 Rc4xa4 62.g7g8=Q Ra4e4 63.f5f6 Re4e5 64.f6f7 Re5g5 65.Rb6b4 Kf4e5 66.Qg8xg5 Ke5e6
+67.Rb4b6 Ke6d7 68.Qg5d8 1-0

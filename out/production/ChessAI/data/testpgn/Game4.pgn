@@ -1,0 +1,10 @@
+[Event "?"]
+[Site "?"]
+[Date "2022.12.06"]
+[White "Human"]
+[Black "AI3 PiecePos-Analyzing"]
+[Result "?"]
+
+1.Nb1c3 e7e6 2.d2d4 Bf8b4 3.a2a3 Bb4d6 4.d4d5 Bd6e5 5.d5xe6 Be5xc3 6.b2xc3 f7xe6
+7.Ng1f3 Qd8f6 8.Qd1d3 Nb8c6 9.Bc1g5 Nc6e5 10.Qd3d4 Ne5xf3 11.e2xf3 Qf6xg5 12.f3f4 c7c5
+13.f4xg5 c5xd4 14.c3xd4 h7h6

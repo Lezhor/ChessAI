@@ -32,6 +32,9 @@ public abstract class AI_MinmaxAbstract extends Player {
      */
     public AI_MinmaxAbstract(int player, String aiName, int depth, ScoreBonusInMinmaxFunction scoreBonusInMinmaxFunction, double... scoreBonusInMinmaxFunctionParams) {
         super(player, aiName);
+        if (depth <= 0) {
+            throw new IllegalArgumentException("Depth must be greater than 0");
+        }
         this.searchDepth = depth;
         this.scoreBonusInMinmaxFunction = scoreBonusInMinmaxFunction;
         this.scoreBonusInMinmaxFunctionParams = scoreBonusInMinmaxFunctionParams;

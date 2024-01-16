@@ -1,0 +1,16 @@
+[Event "?"]
+[Site "?"]
+[Date "2023.11.22"]
+[White "AIv2.1-Random"]
+[Black "AIv2.1-Random"]
+[Result "1/2-1/2"]
+
+1.b2b4 g7g6 2.Nb1a3 c7c6 3.g2g4 a7a6 4.d2d3 Qd8b6 5.Bc1e3 Bf8g7 6.g4g5 Ke8d8
+7.Be3d2 Bg7h6 8.f2f3 a6a5 9.Qd1b1 f7f6 10.Ke1d1 f6f5 11.c2c3 Qb6a7 12.Kd1e1 Qa7d4
+13.e2e3 Qd4g7 14.Na3c4 Ra8a6 15.Qb1b2 Ra6a7 16.a2a3 b7b6 17.Bd2c1 f5f4 18.h2h4 Nb8a6
+19.Ke1d1 Kd8e8 20.g5xh6 Ke8f7 21.Qb2g2 Qg7d4 22.Qg2e2 b6b5 23.Kd1e1 Qd4xc3 24.Qe2d2 Na6c5
+25.Ng1h3 f4xe3 26.Nh3f2 Ra7b7 27.Bc1b2 Qc3c1 28.Qd2xc1 Nc5a4 29.Bf1h3 e3xf2 30.Ke1d2 e7e5
+31.Ra1b1 Rb7a7 32.h4h5 Na4c3 33.Bh3f1 Kf7e8 34.f3f4 Ra7a6 35.Qc1e1 a5a4 36.Bf1h3 Ke8e7
+37.Rh1g1 Ke7f6 38.Bb2a1 f2f1=Q 39.f4f5 Qf1g2 40.Rg1xg2 Kf6f7 41.Ba1b2 Nc3d1 42.h5xg6 Kf7f8
+43.Qe1e2 Ng8f6 44.Rb1c1 e5e4 45.Rg2g1 Nf6d5 46.d3d4 Nd5b6 47.Rg1xd1 d7d5 48.Rc1c3 Bc8d7
+49.Rd1a1 Bd7c8 50.Kd2c1 Rh8g8 1/2-1/2

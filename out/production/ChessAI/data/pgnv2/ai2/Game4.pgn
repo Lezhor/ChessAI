@@ -1,0 +1,15 @@
+[Event "?"]
+[Site "?"]
+[Date "2023.11.23"]
+[White "AI3 PiecePos-Analyzing"]
+[Black "AIv2.2-PieceCounting||6.0"]
+[Result "1-0"]
+
+1.e2e3 e7e6 2.Qd1g4 Nb8a6 3.a2a4 d7d5 4.Bf1b5 Bc8d7 5.Ng1e2 c7c6 6.Bb5xa6 b7xa6
+7.O-O Qd8e7 8.Qg4d4 Qe7d8 9.Qd4d3 Qd8b6 10.a4a5 Qb6b5 11.h2h4 Qb5xd3 12.c2xd3 e6e5
+13.f2f4 Bd7f5 14.e3e4 d5xe4 15.Ne2g3 Bf5g4 16.d3xe4 Bf8c5 17.Kg1h2 f7f6 18.Ng3f5 Bg4xf5
+19.e4xf5 e5xf4 20.Ra1a4 g7g5 21.Ra4c4 Bc5f8 22.h4xg5 f4f3 23.Rf1xf3 f6xg5 24.Rc4xc6 Ra8d8
+25.Rc6e6 Ke8f7 26.d2d3 g5g4 27.Rf3f1 Rd8d6 28.Kh2h1 Rd6xe6 29.f5xe6 Kf7e8 30.Bc1e3 h7h5
+31.Rf1c1 Ke8d8 32.Be3xa7 Bf8h6 33.Rc1c6 Ng8e7 34.Rc6xa6 Ne7f5 35.Ba7b6 Kd8e7 36.Bb6c5 Nf5d6
+37.Ra6xd6 Rh8d8 38.Rd6xd8 Ke7xd8 39.a5a6 Bh6g7 40.a6a7 Bg7f8 41.a7a8=Q Kd8c7 42.Bc5xf8 h5h4
+43.Qa8a6 h4h3 44.Bf8d6 Kc7d8 45.Qa6a8 1-0
