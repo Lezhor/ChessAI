@@ -114,7 +114,7 @@ public abstract class AI_MinmaxAbstract extends Player {
         // White is max / Black is min
 
 
-        if (depth == 0) {
+        if (depth <= 0) {
             return analyzeBoard(board);
         }
 
