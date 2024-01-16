@@ -9,6 +9,7 @@ import program.players.ais.v1.*;
 import program.players.ais.v2.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -29,14 +30,17 @@ public class Main {
     public static void main(String[] args) {
         //runNoUiGames(8);
         //startTerminalGame(AI2_v3::new, AI2_v3::new);
+
+        System.out.println("Args: " + Arrays.toString(args));
+
         switch (5) {
             case 0 -> AnalyzeAI3ParamsWithGames.analyzeWeightPosKnights(); // did
             case 1 -> AnalyzeAI3ParamsWithGames.analyzeWeightPosBishop(); // did
             case 2 -> AnalyzeAI3ParamsWithGames.analyzeWeightPosRook();
             case 3 -> AnalyzeAI3ParamsWithGames.analyzeWeightQueenRook();
             case 4 -> AnalyzeAI3ParamsWithGames.analyzeWeightCastlingBonus();
-            //                                                                                      SEARCHDEPTH, PAWN, BIAS, KNIGHT, BISHOP, ROOK, QUEEN, CASTLING
-            case 5 -> AnalyzeAI3ParamsWithGames.analyzeAIv3_TestParams("dennis_params/", 4, 1, 16, 1.3f, .27f, 1.86f, 1.99f, .12f);
+            //                                                            SEARCHDEPTH, PAWN, BIAS, KNIGHT, BISHOP, ROOK, QUEEN, CASTLING
+            case 5 -> AnalyzeAI3ParamsWithGames.analyzeAIv3_TestParams("dennis_params/", 4, 1, 16, 1.3f, Double.parseDouble(args[0]), Double.parseDouble(args[1]), Double.parseDouble(args[2]), Double.parseDouble(args[3]));
         }
 
     }
