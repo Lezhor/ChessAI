@@ -58,7 +58,7 @@ public class Game {
         this(whitePlayer, blackPlayer, gui, null);
     }
 
-    public Game(Player whitePlayer, Player blackPlayer, Gui gui, String pgnSubDirectory) {
+    public Game(Player whitePlayer, Player blackPlayer, Gui gui, String pgnSubDirectory, String filename) {
         this.whitePlayer = whitePlayer;
         this.blackPlayer = blackPlayer;
         this.gui = gui;
@@ -71,7 +71,14 @@ public class Game {
             if (pgnSubDirectory == null) {
                 pgnWriter = new PGNWriter();
             } else {
-                pgnWriter = new PGNWriter(pgnSubDirectory);
+                try {
+                    if (filename != null) {
+                        pgnWriter = new PGNWriter(pgnSubDirectory, filename);
+                    }
+                } catch (FileAlreadyExistsException e) {
+                    System.err.println("Tried to create file with name '" + filename + "' but file already exists");
+                    pgnWriter = new PGNWriter(pgnSubDirectory);
+                }
             }
         } catch (FileAlreadyExistsException e) {
             e.printStackTrace();
@@ -82,6 +89,10 @@ public class Game {
         gui.printBoard(board, 0);
         gameLoop();
         pgnWriter.writeDataToFile();
+    }
+
+    public Game(Player whitePlayer, Player blackPlayer, Gui gui, String pgnSubDirectory) {
+        this(whitePlayer, blackPlayer, gui, pgnSubDirectory, null);
     }
 
     /**

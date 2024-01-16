@@ -5,6 +5,9 @@ import program.Game;
 import program.guis.NoGui;
 import program.players.ais.v2.AI2_v3;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class AnalyzeAI3ParamsWithGames {
 
     private final static double[] DEFAULT_PARAMETERS = new double[]{
@@ -20,8 +23,9 @@ public class AnalyzeAI3ParamsWithGames {
 
     /**
      * Plays 100 games with DEFAULT_PARAMETERS vs passed params. default params get a 5% spread
+     *
      * @param directoryName directory-name, should NOT start with '/', end not end with '/'
-     * @param params parameters to play against
+     * @param params        parameters to play against
      */
     public static void analyzeAIv3_TestParams(String directoryName, double... params) {
         if (params.length != DEFAULT_PARAMETERS.length) {
@@ -29,7 +33,7 @@ public class AnalyzeAI3ParamsWithGames {
         }
         AIParams aiParams = new AIParams.Builder(DEFAULT_PARAMETERS).build();
 
-        playGamesAIv3("ai3/" + directoryName + "/", params, aiParams, 1, 0);
+        playGamesAIv3("ai3/" + directoryName + "/", params, aiParams, 5, 0);
     }
 
     public static void analyzeAIv3_WeightPosPawns() {
@@ -88,21 +92,33 @@ public class AnalyzeAI3ParamsWithGames {
             System.out.println("Skipping one param set...");
         }
         int directoryCount = 1 + skip;
+        ExecutorService service = Executors.newFixedThreadPool(10);
         do {
             System.out.print("Changed Params: ");
             for (int i = 0; i < samplesPerIteration; i++) {
-                try {
-                    double[] otherParams = iteratingParams.getParams();
-                    //System.out.println(otherParams[3]);
-                    new Game(new AI2_v3(ChessRules.PLAYER_WHITE, defaultParams), new AI2_v3(ChessRules.PLAYER_BLACK, otherParams), new NoGui(), directory + directoryCount + "/iterBlack/");
-                    System.out.print("|");
-                    i++;
-                    new Game(new AI2_v3(ChessRules.PLAYER_WHITE, otherParams), new AI2_v3(ChessRules.PLAYER_BLACK, defaultParams), new NoGui(), directory + directoryCount + "/iterWhite/");
-                    System.out.print("|");
-                } catch (IllegalStateException e) {
-                    System.out.print("_");
-                    i--;
-                }
+                double[] otherParams = iteratingParams.getParams();
+
+                final int dirCount1 = directoryCount;
+                final int i1 = i + 1;
+                service.submit(() -> {
+                    try {
+                        new Game(new AI2_v3(ChessRules.PLAYER_WHITE, defaultParams), new AI2_v3(ChessRules.PLAYER_BLACK, otherParams), new NoGui(), directory + dirCount1 + "/iterBlack/", "Game" + i1 + ".pgn");
+                        System.out.print("|");
+                    } catch (IllegalStateException e) {
+                        System.out.print("_");
+                    }
+                });
+
+                final int dirCount2 = directoryCount;
+                final int i2 = i + 1;
+                service.submit(() -> {
+                    try {
+                        new Game(new AI2_v3(ChessRules.PLAYER_WHITE, otherParams), new AI2_v3(ChessRules.PLAYER_BLACK, defaultParams), new NoGui(), directory + dirCount2 + "/iterWhite/", "Game" + i2 + ".pgn");
+                        System.out.print("|");
+                    } catch (IllegalStateException e) {
+                        System.out.print("_");
+                    }
+                });
             }
             iteratingParams.iterateParams();
             System.out.println();

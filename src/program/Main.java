@@ -36,7 +36,7 @@ public class Main {
             case 3 -> AnalyzeAI3ParamsWithGames.analyzeWeightQueenRook();
             case 4 -> AnalyzeAI3ParamsWithGames.analyzeWeightCastlingBonus();
             //                                                                                      SEARCHDEPTH, PAWN, BIAS, KNIGHT, BISHOP, ROOK, QUEEN, CASTLING
-            case 5 -> AnalyzeAI3ParamsWithGames.analyzeAIv3_TestParams("dennis_params", 4, 1, 16, 1.3f, .27f, 1.86f, 1.99f, .12f);
+            case 5 -> AnalyzeAI3ParamsWithGames.analyzeAIv3_TestParams("dennis_params/", 4, 1, 16, 1.3f, .27f, 1.86f, 1.99f, .12f);
         }
 
     }

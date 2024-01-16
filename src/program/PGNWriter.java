@@ -40,41 +40,37 @@ public class PGNWriter {
 
     /**
      * Calls the PGNWriter(String)-Constructor
+     *
      * @throws FileAlreadyExistsException
      */
     public PGNWriter() throws FileAlreadyExistsException {
         this("pgnv3/");
     }
+
     public PGNWriter(String subDirectory) {
-        synchronized (PGNWriter.class) {
-            this.subDirectory = subDirectory;
-            String fileName = "";
-            File directory = new File(getDirectoryPath());
-            if (!directory.exists()) {
-                directory.mkdirs();
-            }
-            int i = 0;
-            do {
-                i++;
-                try {
-                    fileName = "Game" + (Objects.requireNonNull(new File(getDirectoryPath()).list()).length + i) + ".pgn";
-                } catch (NullPointerException e) {
-                    System.out.println("Directory is Empty");
-                    fileName = "Game1.pgn";
-                }
-                filePath = getDirectoryPath() + fileName;
-            } while (new File(filePath).exists());
-            File file = new File(filePath);
-            try {
-                file.createNewFile();
-            } catch (IOException ignored) {
-            }
-            setDate();
+        this.subDirectory = subDirectory;
+        String fileName = "";
+        File directory = new File(getDirectoryPath());
+        if (!directory.exists()) {
+            directory.mkdirs();
         }
+        int i = 0;
+        do {
+            i++;
+            try {
+                fileName = "Game" + (Objects.requireNonNull(new File(getDirectoryPath()).list()).length + i) + ".pgn";
+            } catch (NullPointerException e) {
+                System.out.println("Directory is Empty");
+                fileName = "Game1.pgn";
+            }
+            filePath = getDirectoryPath() + fileName;
+        } while (new File(filePath).exists());
+        setDate();
     }
 
     /**
      * Initializes the Writer
+     *
      * @param fileName The Filename, without the directory-path.
      */
     public PGNWriter(String subDirectory, String fileName) throws FileAlreadyExistsException {
@@ -160,6 +156,7 @@ public class PGNWriter {
 
     /**
      * Converts the move into the SAN-Notation using the getSAN()-Method and afterwards saves the result in the fileBody-String
+     *
      * @param board The board-Array, the one BEFORE the move was taken. It is necessary in order to determine if the move is a capture or not.
      * @param move  The move-integer. ChessRules.getMoveOldPos(move) and ChessRules.getMoveNewPos(move) can be used on it.
      */
@@ -182,8 +179,9 @@ public class PGNWriter {
 
     /**
      * Converts a move from the integer to the SAN-String.
+     *
      * @param board The board-Array before the move was played.
-     * @param move The move-integer. ChessRules.getMoveOldPos(move) and ChessRules.getMoveNewPos(move) can be used on it.
+     * @param move  The move-integer. ChessRules.getMoveOldPos(move) and ChessRules.getMoveNewPos(move) can be used on it.
      * @return SAN-Notation of move.
      */
     public static String getSAN(int[] board, int move) {
@@ -212,6 +210,7 @@ public class PGNWriter {
 
     /**
      * Converts a given Piece into the letter from SAN-Notation e.g. "B" for Bishop or "" for Pawn.
+     *
      * @param piece The Piece specified in ChessRules.MASK_PIECE
      * @return The SAN-Letter
      */
@@ -245,7 +244,7 @@ public class PGNWriter {
         } + (8 - ((int) Math.floor(pos / 8f)));
     }
 
-    public static int[] getBoardFromFen(String fen) throws IllegalArgumentException{
+    public static int[] getBoardFromFen(String fen) throws IllegalArgumentException {
         int[] board = new int[64];
         String[] fenParts = fen.split(" ");
         if (fenParts.length != 6)
@@ -271,8 +270,9 @@ public class PGNWriter {
         }
         return board;
     }
+
     public static int getPieceFEN(String fenLetter) {
-        int ret =  switch (fenLetter.toUpperCase()) {
+        int ret = switch (fenLetter.toUpperCase()) {
             case "P" -> ChessRules.PIECE_PAWN;
             case "N" -> ChessRules.PIECE_KNIGHT;
             case "B" -> ChessRules.PIECE_BISHOP;
