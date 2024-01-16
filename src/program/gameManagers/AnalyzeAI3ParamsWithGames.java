@@ -17,6 +17,21 @@ public class AnalyzeAI3ParamsWithGames {
             1.1f,   // WeightQueenPos
             .4f     // WeightCastlingBonus
     };
+
+    /**
+     * Plays 100 games with DEFAULT_PARAMETERS vs passed params. default params get a 5% spread
+     * @param directoryName directory-name, should NOT start with '/', end not end with '/'
+     * @param params parameters to play against
+     */
+    public static void analyzeAIv3_TestParams(String directoryName, double... params) {
+        if (params.length != DEFAULT_PARAMETERS.length) {
+            throw new IllegalArgumentException("Wrong number of params");
+        }
+        AIParams aiParams = new AIParams.Builder(DEFAULT_PARAMETERS).build();
+
+        playGamesAIv3("ai3/" + directoryName + "/", params, aiParams, 100, 0);
+    }
+
     public static void analyzeAIv3_WeightPosPawns() {
         AIParams iteratingParams = new AIParams.Builder(DEFAULT_PARAMETERS)
                 .enableIteratingOnParam(1, 0, 3, 9)

@@ -29,12 +29,13 @@ public class Main {
     public static void main(String[] args) {
         //runNoUiGames(8);
         //startTerminalGame(AI2_v3::new, AI2_v3::new);
-        switch (2) {
+        switch (5) {
             case 0 -> AnalyzeAI3ParamsWithGames.analyzeWeightPosKnights(); // did
             case 1 -> AnalyzeAI3ParamsWithGames.analyzeWeightPosBishop(); // did
             case 2 -> AnalyzeAI3ParamsWithGames.analyzeWeightPosRook();
             case 3 -> AnalyzeAI3ParamsWithGames.analyzeWeightQueenRook();
             case 4 -> AnalyzeAI3ParamsWithGames.analyzeWeightCastlingBonus();
+            case 5 -> AnalyzeAI3ParamsWithGames.analyzeAIv3_TestParams("dennis_params", 0, 0, 0, 0, 0, 0, 0, 0); // TODO: 16.01.2024 Add Dennis Params here
         }
 
     }
