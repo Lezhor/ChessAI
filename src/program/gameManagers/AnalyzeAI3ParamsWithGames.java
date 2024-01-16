@@ -29,7 +29,7 @@ public class AnalyzeAI3ParamsWithGames {
         }
         AIParams aiParams = new AIParams.Builder(DEFAULT_PARAMETERS).build();
 
-        playGamesAIv3("ai3/" + directoryName + "/", params, aiParams, 100, 0);
+        playGamesAIv3("ai3/" + directoryName + "/", params, aiParams, 1, 0);
     }
 
     public static void analyzeAIv3_WeightPosPawns() {
