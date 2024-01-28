@@ -156,5 +156,8 @@ public class AI2_v3 extends AI_MinmaxAbstract {
         return modifier * WEIGHT_POS_QUEENS;
     }
 
+    // TODO: 28.01.2024 score has to take the square root of the number of fields a piece can go to - so that it is less difference between 10 and 11 then between 0 and 1
+    // TODO: 28.01.2024 Score-Modifier King - There should be a penalty for if it is not covered up (Check for to how many places a queen could move in the kings position)
+
 
 }
