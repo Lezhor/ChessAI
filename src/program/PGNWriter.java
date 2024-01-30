@@ -4,11 +4,7 @@ import java.io.*;
 import java.nio.file.FileAlreadyExistsException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 import java.util.Objects;
-import java.util.stream.Stream;
 
 public class PGNWriter {
 
