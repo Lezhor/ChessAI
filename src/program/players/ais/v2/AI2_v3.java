@@ -62,6 +62,7 @@ public class AI2_v3 extends AI_MinmaxAbstract {
      * @param board the board which needs to be analyzed.
      * @return A score for the board.
      */
+    @Override
     public double analyzeBoard(int[] board) {
         double score = ChessRules.getScoreByPieceCost(board);
         score += getScoreModifier_PawnPos(board, pawnRowToScore);
@@ -99,7 +100,8 @@ public class AI2_v3 extends AI_MinmaxAbstract {
     private double getScoreModifier_KnightPos(int[] board) {
         double modifier = 0;
         for (int i = 0; i < board.length; i++) {
-            if ((board[i] & ChessRules.MASK_SET_FIELD) > 0 && ((board[i] & ChessRules.MASK_PIECE) == ChessRules.PIECE_KNIGHT)) {
+            if ((board[i] & ChessRules.MASK_SET_FIELD) > 0
+                    && ((board[i] & ChessRules.MASK_PIECE) == ChessRules.PIECE_KNIGHT)) {
                 double positionModifier = ChessRules.getKnightMoves(board, i).size() / 100f;
                 if ((board[i] & ChessRules.MASK_PLAYER) == ChessRules.PLAYER_WHITE) {
                     modifier += positionModifier;
