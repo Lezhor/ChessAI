@@ -33,14 +33,15 @@ public class Main {
 
         System.out.println("Args: " + Arrays.toString(args));
 
-        switch (5) {
+        switch (10) {
             case 0 -> AnalyzeAI3ParamsWithGames.analyzeWeightPosKnights(); // did
             case 1 -> AnalyzeAI3ParamsWithGames.analyzeWeightPosBishop(); // did
             case 2 -> AnalyzeAI3ParamsWithGames.analyzeWeightPosRook();
             case 3 -> AnalyzeAI3ParamsWithGames.analyzeWeightQueenRook();
             case 4 -> AnalyzeAI3ParamsWithGames.analyzeWeightCastlingBonus();
             //                                                            SEARCHDEPTH, PAWN, BIAS, KNIGHT, BISHOP, ROOK, QUEEN, CASTLING
-            case 5 -> AnalyzeAI3ParamsWithGames.analyzeAIv3_TestParams("dennis_params/", 4, 1, 16, 1.3f, Double.parseDouble(args[0]), Double.parseDouble(args[1]), Double.parseDouble(args[2]), Double.parseDouble(args[3]));
+            case 5 -> AnalyzeAI3ParamsWithGames.analyzeAIv3_TestParams("params/", 4, 1, 16, 1.3f, Double.parseDouble(args[0]), Double.parseDouble(args[1]), Double.parseDouble(args[2]), Double.parseDouble(args[3]));
+            default -> startTerminalGame(0, 23); // Human player vs latest version of bot
         }
 
     }
